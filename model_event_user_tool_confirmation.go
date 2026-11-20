@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,13 +21,13 @@ var _ MappedNullable = &EventUserToolConfirmation{}
 
 // EventUserToolConfirmation struct for EventUserToolConfirmation
 type EventUserToolConfirmation struct {
-	Type         string         `json:"type"`
-	Id           string         `json:"id"`
-	ProcessedAt  NullableString `json:"processed_at"`
+	Type string `json:"type"`
+	Id string `json:"id"`
+	ProcessedAt NullableString `json:"processed_at"`
 	InputEventId NullableString `json:"input_event_id"`
-	ToolUseId    string         `json:"tool_use_id"`
-	Result       string         `json:"result"`
-	DenyMessage  *string        `json:"deny_message,omitempty"`
+	ToolUseId string `json:"tool_use_id"`
+	Result string `json:"result"`
+	DenyMessage *string `json:"deny_message,omitempty"`
 }
 
 type _EventUserToolConfirmation EventUserToolConfirmation
@@ -236,7 +236,7 @@ func (o *EventUserToolConfirmation) SetDenyMessage(v string) {
 }
 
 func (o EventUserToolConfirmation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -275,10 +275,10 @@ func (o *EventUserToolConfirmation) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -334,3 +334,5 @@ func (v *NullableEventUserToolConfirmation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

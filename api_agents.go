@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -19,14 +19,15 @@ import (
 	"strings"
 )
 
+
 // AgentsAPIService AgentsAPI service
 type AgentsAPIService service
 
 type ApiCreateAgentRequest struct {
-	ctx                context.Context
-	ApiService         *AgentsAPIService
+	ctx context.Context
+	ApiService *AgentsAPIService
 	requestAgentCreate *RequestAgentCreate
-	idempotencyKey     *string
+	idempotencyKey *string
 }
 
 func (r ApiCreateAgentRequest) RequestAgentCreate(requestAgentCreate RequestAgentCreate) ApiCreateAgentRequest {
@@ -48,25 +49,24 @@ CreateAgent 创建 Agent
 
 POST /v1/agents：创建 Agent 的第 1 个版本。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateAgentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateAgentRequest
 */
 func (a *AgentsAPIService) CreateAgent(ctx context.Context) ApiCreateAgentRequest {
 	return ApiCreateAgentRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseAgent
+//  @return ResponseAgent
 func (a *AgentsAPIService) CreateAgentExecute(r ApiCreateAgentRequest) (*ResponseAgent, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseAgent
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseAgent
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.CreateAgent")
@@ -148,8 +148,8 @@ func (a *AgentsAPIService) CreateAgentExecute(r ApiCreateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -159,8 +159,8 @@ func (a *AgentsAPIService) CreateAgentExecute(r ApiCreateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -170,8 +170,8 @@ func (a *AgentsAPIService) CreateAgentExecute(r ApiCreateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -181,8 +181,8 @@ func (a *AgentsAPIService) CreateAgentExecute(r ApiCreateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -192,18 +192,18 @@ func (a *AgentsAPIService) CreateAgentExecute(r ApiCreateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -220,10 +220,10 @@ func (a *AgentsAPIService) CreateAgentExecute(r ApiCreateAgentRequest) (*Respons
 }
 
 type ApiGetAgentRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AgentsAPIService
-	id         string
-	version    *int64
+	id string
+	version *int64
 }
 
 func (r ApiGetAgentRequest) Version(version int64) ApiGetAgentRequest {
@@ -240,27 +240,26 @@ GetAgent 查询 Agent 详情
 
 GET /v1/agents/:id：读取 Agent 的最新版本或指定版本。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiGetAgentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiGetAgentRequest
 */
 func (a *AgentsAPIService) GetAgent(ctx context.Context, id string) ApiGetAgentRequest {
 	return ApiGetAgentRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseAgent
+//  @return ResponseAgent
 func (a *AgentsAPIService) GetAgentExecute(r ApiGetAgentRequest) (*ResponseAgent, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseAgent
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseAgent
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.GetAgent")
@@ -338,8 +337,8 @@ func (a *AgentsAPIService) GetAgentExecute(r ApiGetAgentRequest) (*ResponseAgent
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -349,8 +348,8 @@ func (a *AgentsAPIService) GetAgentExecute(r ApiGetAgentRequest) (*ResponseAgent
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -360,8 +359,8 @@ func (a *AgentsAPIService) GetAgentExecute(r ApiGetAgentRequest) (*ResponseAgent
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -371,18 +370,18 @@ func (a *AgentsAPIService) GetAgentExecute(r ApiGetAgentRequest) (*ResponseAgent
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -399,11 +398,11 @@ func (a *AgentsAPIService) GetAgentExecute(r ApiGetAgentRequest) (*ResponseAgent
 }
 
 type ApiListAgentVersionsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AgentsAPIService
-	id         string
-	limit      *int64
-	page       *string
+	id string
+	limit *int64
+	page *string
 }
 
 func (r ApiListAgentVersionsRequest) Limit(limit int64) ApiListAgentVersionsRequest {
@@ -425,27 +424,26 @@ ListAgentVersions 查询 Agent 版本列表
 
 GET /v1/agents/:id/versions：按版本号升序列出全部版本。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiListAgentVersionsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiListAgentVersionsRequest
 */
 func (a *AgentsAPIService) ListAgentVersions(ctx context.Context, id string) ApiListAgentVersionsRequest {
 	return ApiListAgentVersionsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseAgentList
+//  @return ResponseAgentList
 func (a *AgentsAPIService) ListAgentVersionsExecute(r ApiListAgentVersionsRequest) (*ResponseAgentList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseAgentList
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseAgentList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.ListAgentVersions")
@@ -530,8 +528,8 @@ func (a *AgentsAPIService) ListAgentVersionsExecute(r ApiListAgentVersionsReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -541,8 +539,8 @@ func (a *AgentsAPIService) ListAgentVersionsExecute(r ApiListAgentVersionsReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -552,8 +550,8 @@ func (a *AgentsAPIService) ListAgentVersionsExecute(r ApiListAgentVersionsReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -563,18 +561,18 @@ func (a *AgentsAPIService) ListAgentVersionsExecute(r ApiListAgentVersionsReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -591,10 +589,10 @@ func (a *AgentsAPIService) ListAgentVersionsExecute(r ApiListAgentVersionsReques
 }
 
 type ApiListAgentsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AgentsAPIService
-	limit      *int64
-	page       *string
+	limit *int64
+	page *string
 }
 
 func (r ApiListAgentsRequest) Limit(limit int64) ApiListAgentsRequest {
@@ -616,25 +614,24 @@ ListAgents 查询 Agent 列表
 
 GET /v1/agents：按创建时间倒序列出 Agent 的最新版本。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListAgentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListAgentsRequest
 */
 func (a *AgentsAPIService) ListAgents(ctx context.Context) ApiListAgentsRequest {
 	return ApiListAgentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseAgentList
+//  @return ResponseAgentList
 func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*ResponseAgentList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseAgentList
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseAgentList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.ListAgents")
@@ -718,8 +715,8 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*ResponseA
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -729,8 +726,8 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*ResponseA
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -740,18 +737,18 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*ResponseA
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -768,11 +765,11 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*ResponseA
 }
 
 type ApiUpdateAgentRequest struct {
-	ctx                context.Context
-	ApiService         *AgentsAPIService
-	id                 string
+	ctx context.Context
+	ApiService *AgentsAPIService
+	id string
 	requestAgentUpdate *RequestAgentUpdate
-	idempotencyKey     *string
+	idempotencyKey *string
 }
 
 func (r ApiUpdateAgentRequest) RequestAgentUpdate(requestAgentUpdate RequestAgentUpdate) ApiUpdateAgentRequest {
@@ -794,27 +791,26 @@ UpdateAgent 更新 Agent
 
 POST /v1/agents/:id：修改配置并生成新版本。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiUpdateAgentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiUpdateAgentRequest
 */
 func (a *AgentsAPIService) UpdateAgent(ctx context.Context, id string) ApiUpdateAgentRequest {
 	return ApiUpdateAgentRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseAgent
+//  @return ResponseAgent
 func (a *AgentsAPIService) UpdateAgentExecute(r ApiUpdateAgentRequest) (*ResponseAgent, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseAgent
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseAgent
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsAPIService.UpdateAgent")
@@ -897,8 +893,8 @@ func (a *AgentsAPIService) UpdateAgentExecute(r ApiUpdateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -908,8 +904,8 @@ func (a *AgentsAPIService) UpdateAgentExecute(r ApiUpdateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -919,8 +915,8 @@ func (a *AgentsAPIService) UpdateAgentExecute(r ApiUpdateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -930,8 +926,8 @@ func (a *AgentsAPIService) UpdateAgentExecute(r ApiUpdateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -941,18 +937,18 @@ func (a *AgentsAPIService) UpdateAgentExecute(r ApiUpdateAgentRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

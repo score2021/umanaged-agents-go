@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -18,11 +18,12 @@ import (
 	"net/url"
 )
 
+
 // ModelsAPIService ModelsAPI service
 type ModelsAPIService service
 
 type ApiListModelsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *ModelsAPIService
 }
 
@@ -35,25 +36,24 @@ ListModels 查询模型列表
 
 GET /v1/models：列出可用的模型，取得创建 Agent 时使用的模型 ID。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListModelsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListModelsRequest
 */
 func (a *ModelsAPIService) ListModels(ctx context.Context) ApiListModelsRequest {
 	return ApiListModelsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseModelList
+//  @return ResponseModelList
 func (a *ModelsAPIService) ListModelsExecute(r ApiListModelsRequest) (*ResponseModelList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseModelList
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseModelList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ModelsAPIService.ListModels")
@@ -127,8 +127,8 @@ func (a *ModelsAPIService) ListModelsExecute(r ApiListModelsRequest) (*ResponseM
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -138,18 +138,18 @@ func (a *ModelsAPIService) ListModelsExecute(r ApiListModelsRequest) (*ResponseM
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

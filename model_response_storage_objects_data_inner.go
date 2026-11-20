@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -15,9 +15,10 @@ import (
 	"fmt"
 )
 
+
 // ResponseStorageObjectsDataInner struct for ResponseStorageObjectsDataInner
 type ResponseStorageObjectsDataInner struct {
-	ResponseStorageObjectsDataInnerAnyOf  *ResponseStorageObjectsDataInnerAnyOf
+	ResponseStorageObjectsDataInnerAnyOf *ResponseStorageObjectsDataInnerAnyOf
 	ResponseStorageObjectsDataInnerAnyOf1 *ResponseStorageObjectsDataInnerAnyOf1
 }
 
@@ -25,7 +26,7 @@ type ResponseStorageObjectsDataInner struct {
 func (dst *ResponseStorageObjectsDataInner) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into ResponseStorageObjectsDataInnerAnyOf
-	err = json.Unmarshal(data, &dst.ResponseStorageObjectsDataInnerAnyOf)
+	err = json.Unmarshal(data, &dst.ResponseStorageObjectsDataInnerAnyOf);
 	if err == nil {
 		jsonResponseStorageObjectsDataInnerAnyOf, _ := json.Marshal(dst.ResponseStorageObjectsDataInnerAnyOf)
 		if string(jsonResponseStorageObjectsDataInnerAnyOf) == "{}" { // empty struct
@@ -38,7 +39,7 @@ func (dst *ResponseStorageObjectsDataInner) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into ResponseStorageObjectsDataInnerAnyOf1
-	err = json.Unmarshal(data, &dst.ResponseStorageObjectsDataInnerAnyOf1)
+	err = json.Unmarshal(data, &dst.ResponseStorageObjectsDataInnerAnyOf1);
 	if err == nil {
 		jsonResponseStorageObjectsDataInnerAnyOf1, _ := json.Marshal(dst.ResponseStorageObjectsDataInnerAnyOf1)
 		if string(jsonResponseStorageObjectsDataInnerAnyOf1) == "{}" { // empty struct
@@ -65,6 +66,7 @@ func (src ResponseStorageObjectsDataInner) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableResponseStorageObjectsDataInner struct {
 	value *ResponseStorageObjectsDataInner
@@ -101,3 +103,5 @@ func (v *NullableResponseStorageObjectsDataInner) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

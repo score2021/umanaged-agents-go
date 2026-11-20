@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -15,17 +15,18 @@ import (
 	"fmt"
 )
 
+
 // RequestSessionCreateAgent struct for RequestSessionCreateAgent
 type RequestSessionCreateAgent struct {
 	RequestSessionCreateAgentAnyOf *RequestSessionCreateAgentAnyOf
-	String                         *string
+	String *string
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *RequestSessionCreateAgent) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into RequestSessionCreateAgentAnyOf
-	err = json.Unmarshal(data, &dst.RequestSessionCreateAgentAnyOf)
+	err = json.Unmarshal(data, &dst.RequestSessionCreateAgentAnyOf);
 	if err == nil {
 		jsonRequestSessionCreateAgentAnyOf, _ := json.Marshal(dst.RequestSessionCreateAgentAnyOf)
 		if string(jsonRequestSessionCreateAgentAnyOf) == "{}" { // empty struct
@@ -38,7 +39,7 @@ func (dst *RequestSessionCreateAgent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into String
-	err = json.Unmarshal(data, &dst.String)
+	err = json.Unmarshal(data, &dst.String);
 	if err == nil {
 		jsonString, _ := json.Marshal(dst.String)
 		if string(jsonString) == "{}" { // empty struct
@@ -65,6 +66,7 @@ func (src RequestSessionCreateAgent) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableRequestSessionCreateAgent struct {
 	value *RequestSessionCreateAgent
@@ -101,3 +103,5 @@ func (v *NullableRequestSessionCreateAgent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

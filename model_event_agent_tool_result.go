@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -20,14 +20,14 @@ var _ MappedNullable = &EventAgentToolResult{}
 
 // EventAgentToolResult struct for EventAgentToolResult
 type EventAgentToolResult struct {
-	Type                 string                         `json:"type"`
-	Id                   string                         `json:"id"`
-	ProcessedAt          NullableString                 `json:"processed_at"`
-	InputEventId         NullableString                 `json:"input_event_id"`
-	ToolUseId            string                         `json:"tool_use_id"`
-	IsError              bool                           `json:"is_error"`
-	Content              []EventUserMessageContentInner `json:"content"`
-	McpServerName        *string                        `json:"mcp_server_name,omitempty"`
+	Type string `json:"type"`
+	Id string `json:"id"`
+	ProcessedAt NullableString `json:"processed_at"`
+	InputEventId NullableString `json:"input_event_id"`
+	ToolUseId string `json:"tool_use_id"`
+	IsError bool `json:"is_error"`
+	Content []EventUserMessageContentInner `json:"content"`
+	McpServerName *string `json:"mcp_server_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -262,7 +262,7 @@ func (o *EventAgentToolResult) SetMcpServerName(v string) {
 }
 
 func (o EventAgentToolResult) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -308,10 +308,10 @@ func (o *EventAgentToolResult) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -379,3 +379,5 @@ func (v *NullableEventAgentToolResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

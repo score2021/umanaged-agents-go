@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,23 +21,21 @@ var _ MappedNullable = &ResponseAgentListDataInner{}
 
 // ResponseAgentListDataInner struct for ResponseAgentListDataInner
 type ResponseAgentListDataInner struct {
-	Id                string                                  `json:"id"`
-	Type              string                                  `json:"type"`
-	Version           int64                                   `json:"version"`
-	Name              string                                  `json:"name"`
-	Description       NullableString                          `json:"description"`
-	System            NullableString                          `json:"system"`
-	Model             ResponseAgentListDataInnerModel         `json:"model"`
-	Tools             []interface{}                           `json:"tools"`
-	McpServers        []interface{}                           `json:"mcp_servers"`
-	Skills            []ResponseAgentListDataInnerSkillsInner `json:"skills"`
-	Delivery          string                                  `json:"delivery"`
-	RequiredArtifacts []string                                `json:"required_artifacts"`
-	WorkspaceAgentsMd bool                                    `json:"workspace_agents_md"`
-	ContextManagement []interface{}                           `json:"context_management"`
-	CreatedBy         string                                  `json:"created_by"`
-	CreatedAt         string                                  `json:"created_at"`
-	UpdatedAt         string                                  `json:"updated_at"`
+	Id string `json:"id"`
+	Type string `json:"type"`
+	Version int64 `json:"version"`
+	Name string `json:"name"`
+	Description NullableString `json:"description"`
+	System NullableString `json:"system"`
+	Model ResponseAgentListDataInnerModel `json:"model"`
+	Tools []interface{} `json:"tools"`
+	McpServers []interface{} `json:"mcp_servers"`
+	Skills []ResponseAgentListDataInnerSkillsInner `json:"skills"`
+	WorkspaceAgentsMd bool `json:"workspace_agents_md"`
+	ContextManagement []interface{} `json:"context_management"`
+	CreatedBy string `json:"created_by"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
 }
 
 type _ResponseAgentListDataInner ResponseAgentListDataInner
@@ -46,7 +44,7 @@ type _ResponseAgentListDataInner ResponseAgentListDataInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResponseAgentListDataInner(id string, type_ string, version int64, name string, description NullableString, system NullableString, model ResponseAgentListDataInnerModel, tools []interface{}, mcpServers []interface{}, skills []ResponseAgentListDataInnerSkillsInner, delivery string, requiredArtifacts []string, workspaceAgentsMd bool, contextManagement []interface{}, createdBy string, createdAt string, updatedAt string) *ResponseAgentListDataInner {
+func NewResponseAgentListDataInner(id string, type_ string, version int64, name string, description NullableString, system NullableString, model ResponseAgentListDataInnerModel, tools []interface{}, mcpServers []interface{}, skills []ResponseAgentListDataInnerSkillsInner, workspaceAgentsMd bool, contextManagement []interface{}, createdBy string, createdAt string, updatedAt string) *ResponseAgentListDataInner {
 	this := ResponseAgentListDataInner{}
 	this.Id = id
 	this.Type = type_
@@ -58,8 +56,6 @@ func NewResponseAgentListDataInner(id string, type_ string, version int64, name 
 	this.Tools = tools
 	this.McpServers = mcpServers
 	this.Skills = skills
-	this.Delivery = delivery
-	this.RequiredArtifacts = requiredArtifacts
 	this.WorkspaceAgentsMd = workspaceAgentsMd
 	this.ContextManagement = contextManagement
 	this.CreatedBy = createdBy
@@ -320,54 +316,6 @@ func (o *ResponseAgentListDataInner) SetSkills(v []ResponseAgentListDataInnerSki
 	o.Skills = v
 }
 
-// GetDelivery returns the Delivery field value
-func (o *ResponseAgentListDataInner) GetDelivery() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Delivery
-}
-
-// GetDeliveryOk returns a tuple with the Delivery field value
-// and a boolean to check if the value has been set.
-func (o *ResponseAgentListDataInner) GetDeliveryOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Delivery, true
-}
-
-// SetDelivery sets field value
-func (o *ResponseAgentListDataInner) SetDelivery(v string) {
-	o.Delivery = v
-}
-
-// GetRequiredArtifacts returns the RequiredArtifacts field value
-func (o *ResponseAgentListDataInner) GetRequiredArtifacts() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.RequiredArtifacts
-}
-
-// GetRequiredArtifactsOk returns a tuple with the RequiredArtifacts field value
-// and a boolean to check if the value has been set.
-func (o *ResponseAgentListDataInner) GetRequiredArtifactsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.RequiredArtifacts, true
-}
-
-// SetRequiredArtifacts sets field value
-func (o *ResponseAgentListDataInner) SetRequiredArtifacts(v []string) {
-	o.RequiredArtifacts = v
-}
-
 // GetWorkspaceAgentsMd returns the WorkspaceAgentsMd field value
 func (o *ResponseAgentListDataInner) GetWorkspaceAgentsMd() bool {
 	if o == nil {
@@ -489,7 +437,7 @@ func (o *ResponseAgentListDataInner) SetUpdatedAt(v string) {
 }
 
 func (o ResponseAgentListDataInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -508,8 +456,6 @@ func (o ResponseAgentListDataInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["tools"] = o.Tools
 	toSerialize["mcp_servers"] = o.McpServers
 	toSerialize["skills"] = o.Skills
-	toSerialize["delivery"] = o.Delivery
-	toSerialize["required_artifacts"] = o.RequiredArtifacts
 	toSerialize["workspace_agents_md"] = o.WorkspaceAgentsMd
 	toSerialize["context_management"] = o.ContextManagement
 	toSerialize["created_by"] = o.CreatedBy
@@ -533,8 +479,6 @@ func (o *ResponseAgentListDataInner) UnmarshalJSON(data []byte) (err error) {
 		"tools",
 		"mcp_servers",
 		"skills",
-		"delivery",
-		"required_artifacts",
 		"workspace_agents_md",
 		"context_management",
 		"created_by",
@@ -547,10 +491,10 @@ func (o *ResponseAgentListDataInner) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -606,3 +550,5 @@ func (v *NullableResponseAgentListDataInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

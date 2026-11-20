@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -19,14 +19,15 @@ import (
 	"strings"
 )
 
+
 // StorageBindingsAPIService StorageBindingsAPI service
 type StorageBindingsAPIService service
 
 type ApiCreateStorageBindingRequest struct {
-	ctx                         context.Context
-	ApiService                  *StorageBindingsAPIService
+	ctx context.Context
+	ApiService *StorageBindingsAPIService
 	requestStorageBindingCreate *RequestStorageBindingCreate
-	idempotencyKey              *string
+	idempotencyKey *string
 }
 
 func (r ApiCreateStorageBindingRequest) RequestStorageBindingCreate(requestStorageBindingCreate RequestStorageBindingCreate) ApiCreateStorageBindingRequest {
@@ -48,25 +49,24 @@ CreateStorageBinding 创建 Memory
 
 POST /v1/storage_bindings：绑定项目自己的 US3 Bucket。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateStorageBindingRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateStorageBindingRequest
 */
 func (a *StorageBindingsAPIService) CreateStorageBinding(ctx context.Context) ApiCreateStorageBindingRequest {
 	return ApiCreateStorageBindingRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseStorageBinding
+//  @return ResponseStorageBinding
 func (a *StorageBindingsAPIService) CreateStorageBindingExecute(r ApiCreateStorageBindingRequest) (*ResponseStorageBinding, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseStorageBinding
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseStorageBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageBindingsAPIService.CreateStorageBinding")
@@ -148,8 +148,8 @@ func (a *StorageBindingsAPIService) CreateStorageBindingExecute(r ApiCreateStora
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -159,8 +159,8 @@ func (a *StorageBindingsAPIService) CreateStorageBindingExecute(r ApiCreateStora
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -170,8 +170,8 @@ func (a *StorageBindingsAPIService) CreateStorageBindingExecute(r ApiCreateStora
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -181,8 +181,8 @@ func (a *StorageBindingsAPIService) CreateStorageBindingExecute(r ApiCreateStora
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 502 {
@@ -192,18 +192,18 @@ func (a *StorageBindingsAPIService) CreateStorageBindingExecute(r ApiCreateStora
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -220,9 +220,9 @@ func (a *StorageBindingsAPIService) CreateStorageBindingExecute(r ApiCreateStora
 }
 
 type ApiDeleteStorageBindingRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *StorageBindingsAPIService
-	id         string
+	id string
 }
 
 func (r ApiDeleteStorageBindingRequest) Execute() (*ResponseStorageBindingDeleted, *http.Response, error) {
@@ -234,27 +234,26 @@ DeleteStorageBinding 删除 Memory
 
 DELETE /v1/storage_bindings/:id：删除 Memory。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiDeleteStorageBindingRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiDeleteStorageBindingRequest
 */
 func (a *StorageBindingsAPIService) DeleteStorageBinding(ctx context.Context, id string) ApiDeleteStorageBindingRequest {
 	return ApiDeleteStorageBindingRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseStorageBindingDeleted
+//  @return ResponseStorageBindingDeleted
 func (a *StorageBindingsAPIService) DeleteStorageBindingExecute(r ApiDeleteStorageBindingRequest) (*ResponseStorageBindingDeleted, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseStorageBindingDeleted
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseStorageBindingDeleted
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageBindingsAPIService.DeleteStorageBinding")
@@ -329,8 +328,8 @@ func (a *StorageBindingsAPIService) DeleteStorageBindingExecute(r ApiDeleteStora
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -340,8 +339,8 @@ func (a *StorageBindingsAPIService) DeleteStorageBindingExecute(r ApiDeleteStora
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -351,18 +350,18 @@ func (a *StorageBindingsAPIService) DeleteStorageBindingExecute(r ApiDeleteStora
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -379,9 +378,9 @@ func (a *StorageBindingsAPIService) DeleteStorageBindingExecute(r ApiDeleteStora
 }
 
 type ApiGetStorageBindingRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *StorageBindingsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetStorageBindingRequest) Execute() (*ResponseStorageBinding, *http.Response, error) {
@@ -393,27 +392,26 @@ GetStorageBinding 查询 Memory 详情
 
 GET /v1/storage_bindings/:id：读取一个 Memory。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiGetStorageBindingRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiGetStorageBindingRequest
 */
 func (a *StorageBindingsAPIService) GetStorageBinding(ctx context.Context, id string) ApiGetStorageBindingRequest {
 	return ApiGetStorageBindingRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseStorageBinding
+//  @return ResponseStorageBinding
 func (a *StorageBindingsAPIService) GetStorageBindingExecute(r ApiGetStorageBindingRequest) (*ResponseStorageBinding, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseStorageBinding
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseStorageBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageBindingsAPIService.GetStorageBinding")
@@ -488,8 +486,8 @@ func (a *StorageBindingsAPIService) GetStorageBindingExecute(r ApiGetStorageBind
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -499,8 +497,8 @@ func (a *StorageBindingsAPIService) GetStorageBindingExecute(r ApiGetStorageBind
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -510,18 +508,18 @@ func (a *StorageBindingsAPIService) GetStorageBindingExecute(r ApiGetStorageBind
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -538,7 +536,7 @@ func (a *StorageBindingsAPIService) GetStorageBindingExecute(r ApiGetStorageBind
 }
 
 type ApiListStorageBindingsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *StorageBindingsAPIService
 }
 
@@ -551,25 +549,24 @@ ListStorageBindings 查询 Memory 列表
 
 GET /v1/storage_bindings：列出项目的 Memory。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListStorageBindingsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListStorageBindingsRequest
 */
 func (a *StorageBindingsAPIService) ListStorageBindings(ctx context.Context) ApiListStorageBindingsRequest {
 	return ApiListStorageBindingsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseStorageBindingList
+//  @return ResponseStorageBindingList
 func (a *StorageBindingsAPIService) ListStorageBindingsExecute(r ApiListStorageBindingsRequest) (*ResponseStorageBindingList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseStorageBindingList
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseStorageBindingList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageBindingsAPIService.ListStorageBindings")
@@ -643,8 +640,8 @@ func (a *StorageBindingsAPIService) ListStorageBindingsExecute(r ApiListStorageB
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -654,8 +651,8 @@ func (a *StorageBindingsAPIService) ListStorageBindingsExecute(r ApiListStorageB
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -665,18 +662,18 @@ func (a *StorageBindingsAPIService) ListStorageBindingsExecute(r ApiListStorageB
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -693,11 +690,11 @@ func (a *StorageBindingsAPIService) ListStorageBindingsExecute(r ApiListStorageB
 }
 
 type ApiListStorageObjectsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *StorageBindingsAPIService
-	id         string
-	prefix     *string
-	page       *string
+	id string
+	prefix *string
+	page *string
 }
 
 func (r ApiListStorageObjectsRequest) Prefix(prefix string) ApiListStorageObjectsRequest {
@@ -719,27 +716,26 @@ ListStorageObjects 浏览 Memory 中的对象
 
 GET /v1/storage_bindings/:id/objects：逐层浏览 Memory 中的目录和文件。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiListStorageObjectsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiListStorageObjectsRequest
 */
 func (a *StorageBindingsAPIService) ListStorageObjects(ctx context.Context, id string) ApiListStorageObjectsRequest {
 	return ApiListStorageObjectsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseStorageObjects
+//  @return ResponseStorageObjects
 func (a *StorageBindingsAPIService) ListStorageObjectsExecute(r ApiListStorageObjectsRequest) (*ResponseStorageObjects, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseStorageObjects
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseStorageObjects
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageBindingsAPIService.ListStorageObjects")
@@ -820,8 +816,8 @@ func (a *StorageBindingsAPIService) ListStorageObjectsExecute(r ApiListStorageOb
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -831,8 +827,8 @@ func (a *StorageBindingsAPIService) ListStorageObjectsExecute(r ApiListStorageOb
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -842,8 +838,8 @@ func (a *StorageBindingsAPIService) ListStorageObjectsExecute(r ApiListStorageOb
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -853,8 +849,8 @@ func (a *StorageBindingsAPIService) ListStorageObjectsExecute(r ApiListStorageOb
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 502 {
@@ -864,18 +860,18 @@ func (a *StorageBindingsAPIService) ListStorageObjectsExecute(r ApiListStorageOb
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

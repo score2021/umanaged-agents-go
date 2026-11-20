@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,17 +21,17 @@ var _ MappedNullable = &ResponseTraceLinksDataInner{}
 
 // ResponseTraceLinksDataInner struct for ResponseTraceLinksDataInner
 type ResponseTraceLinksDataInner struct {
-	InputEventId   string         `json:"input_event_id"`
-	TraceId        string         `json:"trace_id"`
-	State          string         `json:"state"`
-	Exported       int64          `json:"exported"`
-	Verified       int64          `json:"verified"`
-	Pending        int64          `json:"pending"`
-	Failed         int64          `json:"failed"`
-	Unknown        int64          `json:"unknown"`
-	Drifted        int64          `json:"drifted"`
-	DuplicatesSeen int64          `json:"duplicates_seen"`
-	Url            NullableString `json:"url"`
+	InputEventId string `json:"input_event_id"`
+	TraceId string `json:"trace_id"`
+	State string `json:"state"`
+	Exported int64 `json:"exported"`
+	Verified int64 `json:"verified"`
+	Pending int64 `json:"pending"`
+	Failed int64 `json:"failed"`
+	Unknown int64 `json:"unknown"`
+	Drifted int64 `json:"drifted"`
+	DuplicatesSeen int64 `json:"duplicates_seen"`
+	Url NullableString `json:"url"`
 }
 
 type _ResponseTraceLinksDataInner ResponseTraceLinksDataInner
@@ -331,7 +331,7 @@ func (o *ResponseTraceLinksDataInner) SetUrl(v string) {
 }
 
 func (o ResponseTraceLinksDataInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -377,10 +377,10 @@ func (o *ResponseTraceLinksDataInner) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -436,3 +436,5 @@ func (v *NullableResponseTraceLinksDataInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

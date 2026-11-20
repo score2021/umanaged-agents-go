@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,8 +21,8 @@ var _ MappedNullable = &RequestAgentCreateToolsInnerOneOfConfigsInner{}
 
 // RequestAgentCreateToolsInnerOneOfConfigsInner struct for RequestAgentCreateToolsInnerOneOfConfigsInner
 type RequestAgentCreateToolsInnerOneOfConfigsInner struct {
-	Name             string                                                         `json:"name"`
-	Enabled          *bool                                                          `json:"enabled,omitempty"`
+	Name string `json:"name"`
+	Enabled *bool `json:"enabled,omitempty"`
 	PermissionPolicy *RequestAgentCreateToolsInnerOneOfConfigsInnerPermissionPolicy `json:"permission_policy,omitempty"`
 }
 
@@ -135,7 +135,7 @@ func (o *RequestAgentCreateToolsInnerOneOfConfigsInner) SetPermissionPolicy(v Re
 }
 
 func (o RequestAgentCreateToolsInnerOneOfConfigsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -167,10 +167,10 @@ func (o *RequestAgentCreateToolsInnerOneOfConfigsInner) UnmarshalJSON(data []byt
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -226,3 +226,5 @@ func (v *NullableRequestAgentCreateToolsInnerOneOfConfigsInner) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

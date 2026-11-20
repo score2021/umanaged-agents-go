@@ -12,25 +12,26 @@ import (
 	"time"
 )
 
-// Client holds the generated operations and the authentication context for UManaged Agents.
+// Client holds the generated operations and the authentication context for Managed Agents.
 type Client struct {
 	API *APIClient
 	key string
 }
 
-// NewClient uses MVPP_API_URL and MVPP_API_KEY when their arguments are empty.
+// NewClient reads MANAGED_AGENTS_API_URL and MANAGED_AGENTS_API_KEY (then the legacy MVPP_* names) when its arguments
+// are empty. There is no built-in API address (#481).
 func NewClient(baseURL, apiKey string) (*Client, error) {
 	if baseURL == "" {
-		baseURL = os.Getenv("MVPP_API_URL")
+		baseURL = env("API_URL")
 	}
 	if baseURL == "" {
-		baseURL = "https://console.amanager.cn"
+		return nil, errors.New("base URL is required (or MANAGED_AGENTS_API_URL)")
 	}
 	if apiKey == "" {
-		apiKey = os.Getenv("MVPP_API_KEY")
+		apiKey = env("API_KEY")
 	}
 	if apiKey == "" {
-		return nil, errors.New("api key is required (or MVPP_API_KEY)")
+		return nil, errors.New("api key is required (or MANAGED_AGENTS_API_KEY)")
 	}
 	target, err := url.Parse(baseURL)
 	if err != nil || (target.Scheme != "https" && target.Scheme != "http") ||
@@ -47,6 +48,14 @@ func NewClient(baseURL, apiKey string) (*Client, error) {
 		},
 	}
 	return &Client{API: NewAPIClient(cfg), key: apiKey}, nil
+}
+
+// env returns MANAGED_AGENTS_<name>, falling back to the legacy MVPP_<name>; an empty value counts as unset.
+func env(name string) string {
+	if value := os.Getenv("MANAGED_AGENTS_" + name); value != "" {
+		return value
+	}
+	return os.Getenv("MVPP_" + name)
 }
 
 // Context authenticates generated requests without modifying the caller's context.

@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -15,9 +15,10 @@ import (
 	"fmt"
 )
 
+
 // RequestSessionCreateResourcesInner struct for RequestSessionCreateResourcesInner
 type RequestSessionCreateResourcesInner struct {
-	RequestSessionCreateResourcesInnerAnyOf  *RequestSessionCreateResourcesInnerAnyOf
+	RequestSessionCreateResourcesInnerAnyOf *RequestSessionCreateResourcesInnerAnyOf
 	RequestSessionCreateResourcesInnerAnyOf1 *RequestSessionCreateResourcesInnerAnyOf1
 }
 
@@ -25,7 +26,7 @@ type RequestSessionCreateResourcesInner struct {
 func (dst *RequestSessionCreateResourcesInner) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into RequestSessionCreateResourcesInnerAnyOf
-	err = json.Unmarshal(data, &dst.RequestSessionCreateResourcesInnerAnyOf)
+	err = json.Unmarshal(data, &dst.RequestSessionCreateResourcesInnerAnyOf);
 	if err == nil {
 		jsonRequestSessionCreateResourcesInnerAnyOf, _ := json.Marshal(dst.RequestSessionCreateResourcesInnerAnyOf)
 		if string(jsonRequestSessionCreateResourcesInnerAnyOf) == "{}" { // empty struct
@@ -38,7 +39,7 @@ func (dst *RequestSessionCreateResourcesInner) UnmarshalJSON(data []byte) error 
 	}
 
 	// try to unmarshal JSON data into RequestSessionCreateResourcesInnerAnyOf1
-	err = json.Unmarshal(data, &dst.RequestSessionCreateResourcesInnerAnyOf1)
+	err = json.Unmarshal(data, &dst.RequestSessionCreateResourcesInnerAnyOf1);
 	if err == nil {
 		jsonRequestSessionCreateResourcesInnerAnyOf1, _ := json.Marshal(dst.RequestSessionCreateResourcesInnerAnyOf1)
 		if string(jsonRequestSessionCreateResourcesInnerAnyOf1) == "{}" { // empty struct
@@ -65,6 +66,7 @@ func (src RequestSessionCreateResourcesInner) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableRequestSessionCreateResourcesInner struct {
 	value *RequestSessionCreateResourcesInner
@@ -101,3 +103,5 @@ func (v *NullableRequestSessionCreateResourcesInner) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

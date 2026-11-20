@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -20,13 +20,13 @@ var _ MappedNullable = &ResponseSkillVersionContent{}
 
 // ResponseSkillVersionContent struct for ResponseSkillVersionContent
 type ResponseSkillVersionContent struct {
-	SkillId              string                                  `json:"skill_id"`
-	Version              string                                  `json:"version"`
-	Name                 string                                  `json:"name"`
-	Description          string                                  `json:"description"`
-	CreatedAt            string                                  `json:"created_at"`
-	Source               *ResponseSkillDetailSource              `json:"source,omitempty"`
-	Files                []ResponseSkillVersionContentFilesInner `json:"files"`
+	SkillId string `json:"skill_id"`
+	Version string `json:"version"`
+	Name string `json:"name"`
+	Description string `json:"description"`
+	CreatedAt string `json:"created_at"`
+	Source *ResponseSkillDetailSource `json:"source,omitempty"`
+	Files []ResponseSkillVersionContentFilesInner `json:"files"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -232,7 +232,7 @@ func (o *ResponseSkillVersionContent) SetFiles(v []ResponseSkillVersionContentFi
 }
 
 func (o ResponseSkillVersionContent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -276,10 +276,10 @@ func (o *ResponseSkillVersionContent) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -346,3 +346,5 @@ func (v *NullableResponseSkillVersionContent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

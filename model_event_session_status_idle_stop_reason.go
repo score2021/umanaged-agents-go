@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -15,9 +15,10 @@ import (
 	"fmt"
 )
 
+
 // EventSessionStatusIdleStopReason struct for EventSessionStatusIdleStopReason
 type EventSessionStatusIdleStopReason struct {
-	EventSessionStatusIdleStopReasonAnyOf  *EventSessionStatusIdleStopReasonAnyOf
+	EventSessionStatusIdleStopReasonAnyOf *EventSessionStatusIdleStopReasonAnyOf
 	EventSessionStatusIdleStopReasonAnyOf1 *EventSessionStatusIdleStopReasonAnyOf1
 	EventSessionStatusIdleStopReasonAnyOf2 *EventSessionStatusIdleStopReasonAnyOf2
 }
@@ -26,7 +27,7 @@ type EventSessionStatusIdleStopReason struct {
 func (dst *EventSessionStatusIdleStopReason) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into EventSessionStatusIdleStopReasonAnyOf
-	err = json.Unmarshal(data, &dst.EventSessionStatusIdleStopReasonAnyOf)
+	err = json.Unmarshal(data, &dst.EventSessionStatusIdleStopReasonAnyOf);
 	if err == nil {
 		jsonEventSessionStatusIdleStopReasonAnyOf, _ := json.Marshal(dst.EventSessionStatusIdleStopReasonAnyOf)
 		if string(jsonEventSessionStatusIdleStopReasonAnyOf) == "{}" { // empty struct
@@ -39,7 +40,7 @@ func (dst *EventSessionStatusIdleStopReason) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into EventSessionStatusIdleStopReasonAnyOf1
-	err = json.Unmarshal(data, &dst.EventSessionStatusIdleStopReasonAnyOf1)
+	err = json.Unmarshal(data, &dst.EventSessionStatusIdleStopReasonAnyOf1);
 	if err == nil {
 		jsonEventSessionStatusIdleStopReasonAnyOf1, _ := json.Marshal(dst.EventSessionStatusIdleStopReasonAnyOf1)
 		if string(jsonEventSessionStatusIdleStopReasonAnyOf1) == "{}" { // empty struct
@@ -52,7 +53,7 @@ func (dst *EventSessionStatusIdleStopReason) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into EventSessionStatusIdleStopReasonAnyOf2
-	err = json.Unmarshal(data, &dst.EventSessionStatusIdleStopReasonAnyOf2)
+	err = json.Unmarshal(data, &dst.EventSessionStatusIdleStopReasonAnyOf2);
 	if err == nil {
 		jsonEventSessionStatusIdleStopReasonAnyOf2, _ := json.Marshal(dst.EventSessionStatusIdleStopReasonAnyOf2)
 		if string(jsonEventSessionStatusIdleStopReasonAnyOf2) == "{}" { // empty struct
@@ -83,6 +84,7 @@ func (src EventSessionStatusIdleStopReason) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableEventSessionStatusIdleStopReason struct {
 	value *EventSessionStatusIdleStopReason
@@ -119,3 +121,5 @@ func (v *NullableEventSessionStatusIdleStopReason) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

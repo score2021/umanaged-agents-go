@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -17,14 +17,14 @@ import (
 
 // EventInput - struct for EventInput
 type EventInput struct {
-	InputUserArchive          *InputUserArchive
-	InputUserClose            *InputUserClose
+	InputUserArchive *InputUserArchive
+	InputUserClose *InputUserClose
 	InputUserCustomToolResult *InputUserCustomToolResult
 	InputUserEnvironmentRetry *InputUserEnvironmentRetry
-	InputUserInterrupt        *InputUserInterrupt
-	InputUserMessage          *InputUserMessage
+	InputUserInterrupt *InputUserInterrupt
+	InputUserMessage *InputUserMessage
 	InputUserToolConfirmation *InputUserToolConfirmation
-	InputUserUnarchive        *InputUserUnarchive
+	InputUserUnarchive *InputUserUnarchive
 }
 
 // InputUserArchiveAsEventInput is a convenience function that returns InputUserArchive wrapped in EventInput
@@ -82,6 +82,7 @@ func InputUserUnarchiveAsEventInput(v *InputUserUnarchive) EventInput {
 		InputUserUnarchive: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *EventInput) UnmarshalJSON(data []byte) error {
@@ -230,7 +231,7 @@ func (src EventInput) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *EventInput) GetActualInstance() interface{} {
+func (obj *EventInput) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -271,7 +272,7 @@ func (obj *EventInput) GetActualInstance() interface{} {
 }
 
 // Get the actual instance value
-func (obj EventInput) GetActualInstanceValue() interface{} {
+func (obj EventInput) GetActualInstanceValue() (interface{}) {
 	if obj.InputUserArchive != nil {
 		return *obj.InputUserArchive
 	}
@@ -343,3 +344,5 @@ func (v *NullableEventInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

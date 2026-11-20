@@ -54,3 +54,53 @@ func TestManagedClientRetriesOnlyReplayableRequests(t *testing.T) {
 		})
 	}
 }
+
+func TestManagedClientConfigurationPrecedence(t *testing.T) {
+	t.Setenv("MANAGED_AGENTS_API_URL", "https://new.example/")
+	t.Setenv("MANAGED_AGENTS_API_KEY", "new-key")
+	t.Setenv("MVPP_API_URL", "https://legacy.example")
+	t.Setenv("MVPP_API_KEY", "legacy-key")
+	for _, scenario := range []struct {
+		name, baseURL, apiKey, wantURL, wantKey string
+		unsetNew                                bool
+	}{
+		{name: "new variables win", wantURL: "https://new.example", wantKey: "new-key"},
+		{name: "arguments win", baseURL: "https://arg.example", apiKey: "arg-key", wantURL: "https://arg.example", wantKey: "arg-key"},
+		{name: "legacy fallback", unsetNew: true, wantURL: "https://legacy.example", wantKey: "legacy-key"},
+	} {
+		t.Run(scenario.name, func(t *testing.T) {
+			if scenario.unsetNew {
+				t.Setenv("MANAGED_AGENTS_API_URL", "")
+				t.Setenv("MANAGED_AGENTS_API_KEY", "")
+			}
+			client, err := NewClient(scenario.baseURL, scenario.apiKey)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if got := client.API.GetConfig().Servers[0].URL; got != scenario.wantURL {
+				t.Fatalf("got URL %q, want %q", got, scenario.wantURL)
+			}
+			if client.key != scenario.wantKey {
+				t.Fatalf("got key %q, want %q", client.key, scenario.wantKey)
+			}
+		})
+	}
+}
+
+func TestManagedClientHasNoBuiltInAddress(t *testing.T) {
+	for _, name := range []string{"MANAGED_AGENTS_API_URL", "MVPP_API_URL"} {
+		t.Setenv(name, "")
+	}
+	t.Setenv("MANAGED_AGENTS_API_KEY", "secret-key-value")
+	if _, err := NewClient("", ""); err == nil || err.Error() != "base URL is required (or MANAGED_AGENTS_API_URL)" {
+		t.Fatalf("got %v", err)
+	}
+	if _, err := NewClient("ftp://bad.example", ""); err == nil || strings.Contains(err.Error(), "secret-key-value") {
+		t.Fatalf("got %v", err)
+	}
+	t.Setenv("MANAGED_AGENTS_API_KEY", "")
+	t.Setenv("MVPP_API_KEY", "")
+	if _, err := NewClient("https://x.example", ""); err == nil || err.Error() != "api key is required (or MANAGED_AGENTS_API_KEY)" {
+		t.Fatalf("got %v", err)
+	}
+}

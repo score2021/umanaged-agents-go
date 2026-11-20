@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -19,7 +19,7 @@ var _ MappedNullable = &RequestAgentCreateToolsInnerOneOf2DefaultConfig{}
 
 // RequestAgentCreateToolsInnerOneOf2DefaultConfig struct for RequestAgentCreateToolsInnerOneOf2DefaultConfig
 type RequestAgentCreateToolsInnerOneOf2DefaultConfig struct {
-	Enabled          *bool                                                          `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 	PermissionPolicy *RequestAgentCreateToolsInnerOneOfConfigsInnerPermissionPolicy `json:"permission_policy,omitempty"`
 }
 
@@ -105,7 +105,7 @@ func (o *RequestAgentCreateToolsInnerOneOf2DefaultConfig) SetPermissionPolicy(v 
 }
 
 func (o RequestAgentCreateToolsInnerOneOf2DefaultConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,5 @@ func (v *NullableRequestAgentCreateToolsInnerOneOf2DefaultConfig) UnmarshalJSON(
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

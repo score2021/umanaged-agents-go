@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -15,9 +15,10 @@ import (
 	"fmt"
 )
 
+
 // ResponseSessionListDataInnerResourcesInner struct for ResponseSessionListDataInnerResourcesInner
 type ResponseSessionListDataInnerResourcesInner struct {
-	ResponseSessionListDataInnerResourcesInnerAnyOf  *ResponseSessionListDataInnerResourcesInnerAnyOf
+	ResponseSessionListDataInnerResourcesInnerAnyOf *ResponseSessionListDataInnerResourcesInnerAnyOf
 	ResponseSessionListDataInnerResourcesInnerAnyOf1 *ResponseSessionListDataInnerResourcesInnerAnyOf1
 }
 
@@ -25,7 +26,7 @@ type ResponseSessionListDataInnerResourcesInner struct {
 func (dst *ResponseSessionListDataInnerResourcesInner) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into ResponseSessionListDataInnerResourcesInnerAnyOf
-	err = json.Unmarshal(data, &dst.ResponseSessionListDataInnerResourcesInnerAnyOf)
+	err = json.Unmarshal(data, &dst.ResponseSessionListDataInnerResourcesInnerAnyOf);
 	if err == nil {
 		jsonResponseSessionListDataInnerResourcesInnerAnyOf, _ := json.Marshal(dst.ResponseSessionListDataInnerResourcesInnerAnyOf)
 		if string(jsonResponseSessionListDataInnerResourcesInnerAnyOf) == "{}" { // empty struct
@@ -38,7 +39,7 @@ func (dst *ResponseSessionListDataInnerResourcesInner) UnmarshalJSON(data []byte
 	}
 
 	// try to unmarshal JSON data into ResponseSessionListDataInnerResourcesInnerAnyOf1
-	err = json.Unmarshal(data, &dst.ResponseSessionListDataInnerResourcesInnerAnyOf1)
+	err = json.Unmarshal(data, &dst.ResponseSessionListDataInnerResourcesInnerAnyOf1);
 	if err == nil {
 		jsonResponseSessionListDataInnerResourcesInnerAnyOf1, _ := json.Marshal(dst.ResponseSessionListDataInnerResourcesInnerAnyOf1)
 		if string(jsonResponseSessionListDataInnerResourcesInnerAnyOf1) == "{}" { // empty struct
@@ -65,6 +66,7 @@ func (src ResponseSessionListDataInnerResourcesInner) MarshalJSON() ([]byte, err
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableResponseSessionListDataInnerResourcesInner struct {
 	value *ResponseSessionListDataInnerResourcesInner
@@ -101,3 +103,5 @@ func (v *NullableResponseSessionListDataInnerResourcesInner) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

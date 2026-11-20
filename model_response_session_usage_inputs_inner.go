@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,17 +21,17 @@ var _ MappedNullable = &ResponseSessionUsageInputsInner{}
 
 // ResponseSessionUsageInputsInner struct for ResponseSessionUsageInputsInner
 type ResponseSessionUsageInputsInner struct {
-	InputTokens      float32 `json:"input_tokens"`
-	OutputTokens     float32 `json:"output_tokens"`
-	CacheReadTokens  float32 `json:"cache_read_tokens"`
+	InputTokens float32 `json:"input_tokens"`
+	OutputTokens float32 `json:"output_tokens"`
+	CacheReadTokens float32 `json:"cache_read_tokens"`
 	CacheWriteTokens float32 `json:"cache_write_tokens"`
 	InputTotalTokens float32 `json:"input_total_tokens"`
-	ModelRequests    int64   `json:"model_requests"`
-	RefusedRequests  int64   `json:"refused_requests"`
-	UnknownRequests  int64   `json:"unknown_requests"`
-	InFlightRequests int64   `json:"in_flight_requests"`
-	InputEventId     string  `json:"input_event_id"`
-	AcceptedAt       string  `json:"accepted_at"`
+	ModelRequests int64 `json:"model_requests"`
+	RefusedRequests int64 `json:"refused_requests"`
+	UnknownRequests int64 `json:"unknown_requests"`
+	InFlightRequests int64 `json:"in_flight_requests"`
+	InputEventId string `json:"input_event_id"`
+	AcceptedAt string `json:"accepted_at"`
 }
 
 type _ResponseSessionUsageInputsInner ResponseSessionUsageInputsInner
@@ -329,7 +329,7 @@ func (o *ResponseSessionUsageInputsInner) SetAcceptedAt(v string) {
 }
 
 func (o ResponseSessionUsageInputsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -375,10 +375,10 @@ func (o *ResponseSessionUsageInputsInner) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -434,3 +434,5 @@ func (v *NullableResponseSessionUsageInputsInner) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

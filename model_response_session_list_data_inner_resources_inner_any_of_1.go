@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,12 +21,12 @@ var _ MappedNullable = &ResponseSessionListDataInnerResourcesInnerAnyOf1{}
 
 // ResponseSessionListDataInnerResourcesInnerAnyOf1 struct for ResponseSessionListDataInnerResourcesInnerAnyOf1
 type ResponseSessionListDataInnerResourcesInnerAnyOf1 struct {
-	Type             string `json:"type"`
+	Type string `json:"type"`
 	StorageBindingId string `json:"storage_binding_id"`
-	SubPrefix        string `json:"sub_prefix"`
-	Mode             string `json:"mode"`
-	MountPath        string `json:"mount_path"`
-	CreatedAt        string `json:"created_at"`
+	SubPrefix string `json:"sub_prefix"`
+	Mode string `json:"mode"`
+	MountPath string `json:"mount_path"`
+	CreatedAt string `json:"created_at"`
 }
 
 type _ResponseSessionListDataInnerResourcesInnerAnyOf1 ResponseSessionListDataInnerResourcesInnerAnyOf1
@@ -199,7 +199,7 @@ func (o *ResponseSessionListDataInnerResourcesInnerAnyOf1) SetCreatedAt(v string
 }
 
 func (o ResponseSessionListDataInnerResourcesInnerAnyOf1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,10 +235,10 @@ func (o *ResponseSessionListDataInnerResourcesInnerAnyOf1) UnmarshalJSON(data []
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -294,3 +294,5 @@ func (v *NullableResponseSessionListDataInnerResourcesInnerAnyOf1) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

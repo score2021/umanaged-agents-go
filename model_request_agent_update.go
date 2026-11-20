@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -19,18 +19,16 @@ var _ MappedNullable = &RequestAgentUpdate{}
 
 // RequestAgentUpdate struct for RequestAgentUpdate
 type RequestAgentUpdate struct {
-	Version              *int64                                     `json:"version,omitempty"`
-	Name                 *string                                    `json:"name,omitempty"`
-	Model                *RequestAgentCreateModel                   `json:"model,omitempty"`
-	System               NullableString                             `json:"system,omitempty"`
-	Description          NullableString                             `json:"description,omitempty"`
-	Tools                []RequestAgentCreateToolsInner             `json:"tools,omitempty"`
-	McpServers           []RequestAgentCreateMcpServersInner        `json:"mcp_servers,omitempty"`
-	Skills               []RequestAgentCreateSkillsInner            `json:"skills,omitempty"`
-	Delivery             *string                                    `json:"delivery,omitempty"`
-	RequiredArtifacts    []string                                   `json:"required_artifacts,omitempty"`
-	WorkspaceAgentsMd    *bool                                      `json:"workspace_agents_md,omitempty"`
-	ContextManagement    []RequestAgentCreateContextManagementInner `json:"context_management,omitempty"`
+	Version *int64 `json:"version,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Model *RequestAgentCreateModel `json:"model,omitempty"`
+	System NullableString `json:"system,omitempty"`
+	Description NullableString `json:"description,omitempty"`
+	Tools []RequestAgentCreateToolsInner `json:"tools,omitempty"`
+	McpServers []RequestAgentCreateMcpServersInner `json:"mcp_servers,omitempty"`
+	Skills []RequestAgentCreateSkillsInner `json:"skills,omitempty"`
+	WorkspaceAgentsMd *bool `json:"workspace_agents_md,omitempty"`
+	ContextManagement []RequestAgentCreateContextManagementInner `json:"context_management,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -181,7 +179,6 @@ func (o *RequestAgentUpdate) HasSystem() bool {
 func (o *RequestAgentUpdate) SetSystem(v string) {
 	o.System.Set(&v)
 }
-
 // SetSystemNil sets the value for System to be an explicit nil
 func (o *RequestAgentUpdate) SetSystemNil() {
 	o.System.Set(nil)
@@ -224,7 +221,6 @@ func (o *RequestAgentUpdate) HasDescription() bool {
 func (o *RequestAgentUpdate) SetDescription(v string) {
 	o.Description.Set(&v)
 }
-
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *RequestAgentUpdate) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -334,71 +330,6 @@ func (o *RequestAgentUpdate) SetSkills(v []RequestAgentCreateSkillsInner) {
 	o.Skills = v
 }
 
-// GetDelivery returns the Delivery field value if set, zero value otherwise.
-func (o *RequestAgentUpdate) GetDelivery() string {
-	if o == nil || IsNil(o.Delivery) {
-		var ret string
-		return ret
-	}
-	return *o.Delivery
-}
-
-// GetDeliveryOk returns a tuple with the Delivery field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RequestAgentUpdate) GetDeliveryOk() (*string, bool) {
-	if o == nil || IsNil(o.Delivery) {
-		return nil, false
-	}
-	return o.Delivery, true
-}
-
-// HasDelivery returns a boolean if a field has been set.
-func (o *RequestAgentUpdate) HasDelivery() bool {
-	if o != nil && !IsNil(o.Delivery) {
-		return true
-	}
-
-	return false
-}
-
-// SetDelivery gets a reference to the given string and assigns it to the Delivery field.
-func (o *RequestAgentUpdate) SetDelivery(v string) {
-	o.Delivery = &v
-}
-
-// GetRequiredArtifacts returns the RequiredArtifacts field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *RequestAgentUpdate) GetRequiredArtifacts() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-	return o.RequiredArtifacts
-}
-
-// GetRequiredArtifactsOk returns a tuple with the RequiredArtifacts field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RequestAgentUpdate) GetRequiredArtifactsOk() ([]string, bool) {
-	if o == nil || IsNil(o.RequiredArtifacts) {
-		return nil, false
-	}
-	return o.RequiredArtifacts, true
-}
-
-// HasRequiredArtifacts returns a boolean if a field has been set.
-func (o *RequestAgentUpdate) HasRequiredArtifacts() bool {
-	if o != nil && !IsNil(o.RequiredArtifacts) {
-		return true
-	}
-
-	return false
-}
-
-// SetRequiredArtifacts gets a reference to the given []string and assigns it to the RequiredArtifacts field.
-func (o *RequestAgentUpdate) SetRequiredArtifacts(v []string) {
-	o.RequiredArtifacts = v
-}
-
 // GetWorkspaceAgentsMd returns the WorkspaceAgentsMd field value if set, zero value otherwise.
 func (o *RequestAgentUpdate) GetWorkspaceAgentsMd() bool {
 	if o == nil || IsNil(o.WorkspaceAgentsMd) {
@@ -465,7 +396,7 @@ func (o *RequestAgentUpdate) SetContextManagement(v []RequestAgentCreateContextM
 }
 
 func (o RequestAgentUpdate) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -497,12 +428,6 @@ func (o RequestAgentUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Skills != nil {
 		toSerialize["skills"] = o.Skills
-	}
-	if !IsNil(o.Delivery) {
-		toSerialize["delivery"] = o.Delivery
-	}
-	if o.RequiredArtifacts != nil {
-		toSerialize["required_artifacts"] = o.RequiredArtifacts
 	}
 	if !IsNil(o.WorkspaceAgentsMd) {
 		toSerialize["workspace_agents_md"] = o.WorkspaceAgentsMd
@@ -540,8 +465,6 @@ func (o *RequestAgentUpdate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "tools")
 		delete(additionalProperties, "mcp_servers")
 		delete(additionalProperties, "skills")
-		delete(additionalProperties, "delivery")
-		delete(additionalProperties, "required_artifacts")
 		delete(additionalProperties, "workspace_agents_md")
 		delete(additionalProperties, "context_management")
 		o.AdditionalProperties = additionalProperties
@@ -585,3 +508,5 @@ func (v *NullableRequestAgentUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

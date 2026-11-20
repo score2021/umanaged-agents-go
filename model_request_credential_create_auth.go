@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -15,9 +15,10 @@ import (
 	"fmt"
 )
 
+
 // RequestCredentialCreateAuth struct for RequestCredentialCreateAuth
 type RequestCredentialCreateAuth struct {
-	RequestCredentialCreateAuthAnyOf  *RequestCredentialCreateAuthAnyOf
+	RequestCredentialCreateAuthAnyOf *RequestCredentialCreateAuthAnyOf
 	RequestCredentialCreateAuthAnyOf1 *RequestCredentialCreateAuthAnyOf1
 }
 
@@ -25,7 +26,7 @@ type RequestCredentialCreateAuth struct {
 func (dst *RequestCredentialCreateAuth) UnmarshalJSON(data []byte) error {
 	var err error
 	// try to unmarshal JSON data into RequestCredentialCreateAuthAnyOf
-	err = json.Unmarshal(data, &dst.RequestCredentialCreateAuthAnyOf)
+	err = json.Unmarshal(data, &dst.RequestCredentialCreateAuthAnyOf);
 	if err == nil {
 		jsonRequestCredentialCreateAuthAnyOf, _ := json.Marshal(dst.RequestCredentialCreateAuthAnyOf)
 		if string(jsonRequestCredentialCreateAuthAnyOf) == "{}" { // empty struct
@@ -38,7 +39,7 @@ func (dst *RequestCredentialCreateAuth) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into RequestCredentialCreateAuthAnyOf1
-	err = json.Unmarshal(data, &dst.RequestCredentialCreateAuthAnyOf1)
+	err = json.Unmarshal(data, &dst.RequestCredentialCreateAuthAnyOf1);
 	if err == nil {
 		jsonRequestCredentialCreateAuthAnyOf1, _ := json.Marshal(dst.RequestCredentialCreateAuthAnyOf1)
 		if string(jsonRequestCredentialCreateAuthAnyOf1) == "{}" { // empty struct
@@ -65,6 +66,7 @@ func (src RequestCredentialCreateAuth) MarshalJSON() ([]byte, error) {
 
 	return nil, nil // no data in anyOf schemas
 }
+
 
 type NullableRequestCredentialCreateAuth struct {
 	value *RequestCredentialCreateAuth
@@ -101,3 +103,5 @@ func (v *NullableRequestCredentialCreateAuth) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

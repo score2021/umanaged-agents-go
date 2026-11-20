@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -17,7 +17,7 @@ import (
 
 // RequestAgentCreateToolsInner - struct for RequestAgentCreateToolsInner
 type RequestAgentCreateToolsInner struct {
-	RequestAgentCreateToolsInnerOneOf  *RequestAgentCreateToolsInnerOneOf
+	RequestAgentCreateToolsInnerOneOf *RequestAgentCreateToolsInnerOneOf
 	RequestAgentCreateToolsInnerOneOf1 *RequestAgentCreateToolsInnerOneOf1
 	RequestAgentCreateToolsInnerOneOf2 *RequestAgentCreateToolsInnerOneOf2
 	RequestAgentCreateToolsInnerOneOf3 *RequestAgentCreateToolsInnerOneOf3
@@ -58,6 +58,7 @@ func RequestAgentCreateToolsInnerOneOf4AsRequestAgentCreateToolsInner(v *Request
 		RequestAgentCreateToolsInnerOneOf4: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *RequestAgentCreateToolsInner) UnmarshalJSON(data []byte) error {
@@ -174,7 +175,7 @@ func (src RequestAgentCreateToolsInner) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *RequestAgentCreateToolsInner) GetActualInstance() interface{} {
+func (obj *RequestAgentCreateToolsInner) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -203,7 +204,7 @@ func (obj *RequestAgentCreateToolsInner) GetActualInstance() interface{} {
 }
 
 // Get the actual instance value
-func (obj RequestAgentCreateToolsInner) GetActualInstanceValue() interface{} {
+func (obj RequestAgentCreateToolsInner) GetActualInstanceValue() (interface{}) {
 	if obj.RequestAgentCreateToolsInnerOneOf != nil {
 		return *obj.RequestAgentCreateToolsInnerOneOf
 	}
@@ -263,3 +264,5 @@ func (v *NullableRequestAgentCreateToolsInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

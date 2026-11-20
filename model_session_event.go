@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -17,28 +17,28 @@ import (
 
 // SessionEvent - struct for SessionEvent
 type SessionEvent struct {
-	EventAgentContextCompacted    *EventAgentContextCompacted
-	EventAgentCustomToolUse       *EventAgentCustomToolUse
-	EventAgentMessage             *EventAgentMessage
-	EventAgentToolResult          *EventAgentToolResult
-	EventAgentToolUse             *EventAgentToolUse
-	EventSessionEnvironment       *EventSessionEnvironment
-	EventSessionError             *EventSessionError
-	EventSessionStatusClosed      *EventSessionStatusClosed
-	EventSessionStatusClosing     *EventSessionStatusClosing
-	EventSessionStatusIdle        *EventSessionStatusIdle
+	EventAgentContextCompacted *EventAgentContextCompacted
+	EventAgentCustomToolUse *EventAgentCustomToolUse
+	EventAgentMessage *EventAgentMessage
+	EventAgentToolResult *EventAgentToolResult
+	EventAgentToolUse *EventAgentToolUse
+	EventSessionEnvironment *EventSessionEnvironment
+	EventSessionError *EventSessionError
+	EventSessionStatusClosed *EventSessionStatusClosed
+	EventSessionStatusClosing *EventSessionStatusClosing
+	EventSessionStatusIdle *EventSessionStatusIdle
 	EventSessionStatusRescheduled *EventSessionStatusRescheduled
-	EventSessionStatusRunning     *EventSessionStatusRunning
-	EventSessionStatusTerminated  *EventSessionStatusTerminated
-	EventSessionStatusUnarchived  *EventSessionStatusUnarchived
-	EventUserArchive              *EventUserArchive
-	EventUserClose                *EventUserClose
-	EventUserCustomToolResult     *EventUserCustomToolResult
-	EventUserEnvironmentRetry     *EventUserEnvironmentRetry
-	EventUserInterrupt            *EventUserInterrupt
-	EventUserMessage              *EventUserMessage
-	EventUserToolConfirmation     *EventUserToolConfirmation
-	EventUserUnarchive            *EventUserUnarchive
+	EventSessionStatusRunning *EventSessionStatusRunning
+	EventSessionStatusTerminated *EventSessionStatusTerminated
+	EventSessionStatusUnarchived *EventSessionStatusUnarchived
+	EventUserArchive *EventUserArchive
+	EventUserClose *EventUserClose
+	EventUserCustomToolResult *EventUserCustomToolResult
+	EventUserEnvironmentRetry *EventUserEnvironmentRetry
+	EventUserInterrupt *EventUserInterrupt
+	EventUserMessage *EventUserMessage
+	EventUserToolConfirmation *EventUserToolConfirmation
+	EventUserUnarchive *EventUserUnarchive
 }
 
 // EventAgentContextCompactedAsSessionEvent is a convenience function that returns EventAgentContextCompacted wrapped in SessionEvent
@@ -194,6 +194,7 @@ func EventUserUnarchiveAsSessionEvent(v *EventUserUnarchive) SessionEvent {
 		EventUserUnarchive: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *SessionEvent) UnmarshalJSON(data []byte) error {
@@ -566,7 +567,7 @@ func (src SessionEvent) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *SessionEvent) GetActualInstance() interface{} {
+func (obj *SessionEvent) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -663,7 +664,7 @@ func (obj *SessionEvent) GetActualInstance() interface{} {
 }
 
 // Get the actual instance value
-func (obj SessionEvent) GetActualInstanceValue() interface{} {
+func (obj SessionEvent) GetActualInstanceValue() (interface{}) {
 	if obj.EventAgentContextCompacted != nil {
 		return *obj.EventAgentContextCompacted
 	}
@@ -791,3 +792,5 @@ func (v *NullableSessionEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

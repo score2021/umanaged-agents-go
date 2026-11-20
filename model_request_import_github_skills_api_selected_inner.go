@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &RequestImportGithubSkillsApiSelectedInner{}
 
 // RequestImportGithubSkillsApiSelectedInner struct for RequestImportGithubSkillsApiSelectedInner
 type RequestImportGithubSkillsApiSelectedInner struct {
-	Path                 string `json:"path"`
-	ProtectionEnabled    *bool  `json:"protection_enabled,omitempty"`
+	Path string `json:"path"`
+	ProtectionEnabled *bool `json:"protection_enabled,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -102,7 +102,7 @@ func (o *RequestImportGithubSkillsApiSelectedInner) SetProtectionEnabled(v bool)
 }
 
 func (o RequestImportGithubSkillsApiSelectedInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -136,10 +136,10 @@ func (o *RequestImportGithubSkillsApiSelectedInner) UnmarshalJSON(data []byte) (
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,3 +201,5 @@ func (v *NullableRequestImportGithubSkillsApiSelectedInner) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

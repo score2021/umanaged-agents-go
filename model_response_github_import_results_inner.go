@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,14 +21,14 @@ var _ MappedNullable = &ResponseGithubImportResultsInner{}
 
 // ResponseGithubImportResultsInner struct for ResponseGithubImportResultsInner
 type ResponseGithubImportResultsInner struct {
-	Path         string      `json:"path"`
-	Status       string      `json:"status"`
-	SkillId      *string     `json:"skill_id,omitempty"`
-	Version      *string     `json:"version,omitempty"`
-	Name         *string     `json:"name,omitempty"`
-	ErrorCode    *string     `json:"error_code,omitempty"`
-	ErrorMessage *string     `json:"error_message,omitempty"`
-	Limit        interface{} `json:"limit,omitempty"`
+	Path string `json:"path"`
+	Status string `json:"status"`
+	SkillId *string `json:"skill_id,omitempty"`
+	Version *string `json:"version,omitempty"`
+	Name *string `json:"name,omitempty"`
+	ErrorCode *string `json:"error_code,omitempty"`
+	ErrorMessage *string `json:"error_message,omitempty"`
+	Limit interface{} `json:"limit,omitempty"`
 }
 
 type _ResponseGithubImportResultsInner ResponseGithubImportResultsInner
@@ -294,7 +294,7 @@ func (o *ResponseGithubImportResultsInner) SetLimit(v interface{}) {
 }
 
 func (o ResponseGithubImportResultsInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -340,10 +340,10 @@ func (o *ResponseGithubImportResultsInner) UnmarshalJSON(data []byte) (err error
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -399,3 +399,5 @@ func (v *NullableResponseGithubImportResultsInner) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

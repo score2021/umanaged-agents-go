@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,13 +21,13 @@ var _ MappedNullable = &ResponseSkillAgentListDataInner{}
 
 // ResponseSkillAgentListDataInner struct for ResponseSkillAgentListDataInner
 type ResponseSkillAgentListDataInner struct {
-	AgentId       string `json:"agent_id"`
-	AgentName     string `json:"agent_name"`
-	AgentVersion  int64  `json:"agent_version"`
+	AgentId string `json:"agent_id"`
+	AgentName string `json:"agent_name"`
+	AgentVersion int64 `json:"agent_version"`
 	PinnedVersion string `json:"pinned_version"`
 	LatestVersion string `json:"latest_version"`
-	Outdated      bool   `json:"outdated"`
-	BoundAsLatest bool   `json:"bound_as_latest"`
+	Outdated bool `json:"outdated"`
+	BoundAsLatest bool `json:"bound_as_latest"`
 }
 
 type _ResponseSkillAgentListDataInner ResponseSkillAgentListDataInner
@@ -225,7 +225,7 @@ func (o *ResponseSkillAgentListDataInner) SetBoundAsLatest(v bool) {
 }
 
 func (o ResponseSkillAgentListDataInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -263,10 +263,10 @@ func (o *ResponseSkillAgentListDataInner) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -322,3 +322,5 @@ func (v *NullableResponseSkillAgentListDataInner) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

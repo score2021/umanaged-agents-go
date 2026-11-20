@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -19,15 +19,16 @@ import (
 	"strings"
 )
 
+
 // VaultsAPIService VaultsAPI service
 type VaultsAPIService service
 
 type ApiCreateCredentialRequest struct {
-	ctx                     context.Context
-	ApiService              *VaultsAPIService
-	id                      string
+	ctx context.Context
+	ApiService *VaultsAPIService
+	id string
 	requestCredentialCreate *RequestCredentialCreate
-	idempotencyKey          *string
+	idempotencyKey *string
 }
 
 func (r ApiCreateCredentialRequest) RequestCredentialCreate(requestCredentialCreate RequestCredentialCreate) ApiCreateCredentialRequest {
@@ -49,27 +50,26 @@ CreateCredential 创建凭据
 
 POST /v1/vaults/:id/credentials：为一个 MCP 服务地址保存凭据。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiCreateCredentialRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCreateCredentialRequest
 */
 func (a *VaultsAPIService) CreateCredential(ctx context.Context, id string) ApiCreateCredentialRequest {
 	return ApiCreateCredentialRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseCredential
+//  @return ResponseCredential
 func (a *VaultsAPIService) CreateCredentialExecute(r ApiCreateCredentialRequest) (*ResponseCredential, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseCredential
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseCredential
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VaultsAPIService.CreateCredential")
@@ -152,8 +152,8 @@ func (a *VaultsAPIService) CreateCredentialExecute(r ApiCreateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -163,8 +163,8 @@ func (a *VaultsAPIService) CreateCredentialExecute(r ApiCreateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -174,8 +174,8 @@ func (a *VaultsAPIService) CreateCredentialExecute(r ApiCreateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -185,8 +185,8 @@ func (a *VaultsAPIService) CreateCredentialExecute(r ApiCreateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -196,8 +196,8 @@ func (a *VaultsAPIService) CreateCredentialExecute(r ApiCreateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
@@ -207,18 +207,18 @@ func (a *VaultsAPIService) CreateCredentialExecute(r ApiCreateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -235,10 +235,10 @@ func (a *VaultsAPIService) CreateCredentialExecute(r ApiCreateCredentialRequest)
 }
 
 type ApiCreateVaultRequest struct {
-	ctx                context.Context
-	ApiService         *VaultsAPIService
+	ctx context.Context
+	ApiService *VaultsAPIService
 	requestVaultCreate *RequestVaultCreate
-	idempotencyKey     *string
+	idempotencyKey *string
 }
 
 func (r ApiCreateVaultRequest) RequestVaultCreate(requestVaultCreate RequestVaultCreate) ApiCreateVaultRequest {
@@ -260,25 +260,24 @@ CreateVault 创建保管库
 
 POST /v1/vaults：创建一个保管库。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateVaultRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateVaultRequest
 */
 func (a *VaultsAPIService) CreateVault(ctx context.Context) ApiCreateVaultRequest {
 	return ApiCreateVaultRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseVault
+//  @return ResponseVault
 func (a *VaultsAPIService) CreateVaultExecute(r ApiCreateVaultRequest) (*ResponseVault, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseVault
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseVault
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VaultsAPIService.CreateVault")
@@ -360,8 +359,8 @@ func (a *VaultsAPIService) CreateVaultExecute(r ApiCreateVaultRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -371,8 +370,8 @@ func (a *VaultsAPIService) CreateVaultExecute(r ApiCreateVaultRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -382,8 +381,8 @@ func (a *VaultsAPIService) CreateVaultExecute(r ApiCreateVaultRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
@@ -393,18 +392,18 @@ func (a *VaultsAPIService) CreateVaultExecute(r ApiCreateVaultRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -421,10 +420,10 @@ func (a *VaultsAPIService) CreateVaultExecute(r ApiCreateVaultRequest) (*Respons
 }
 
 type ApiDeleteCredentialRequest struct {
-	ctx            context.Context
-	ApiService     *VaultsAPIService
-	id             string
-	cid            string
+	ctx context.Context
+	ApiService *VaultsAPIService
+	id string
+	cid string
 	idempotencyKey *string
 }
 
@@ -442,29 +441,28 @@ DeleteCredential 撤销凭据
 
 DELETE /v1/vaults/:id/credentials/:cid：撤销一条凭据。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@param cid
-	@return ApiDeleteCredentialRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @param cid
+ @return ApiDeleteCredentialRequest
 */
 func (a *VaultsAPIService) DeleteCredential(ctx context.Context, id string, cid string) ApiDeleteCredentialRequest {
 	return ApiDeleteCredentialRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		cid:        cid,
+		ctx: ctx,
+		id: id,
+		cid: cid,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseCredential
+//  @return ResponseCredential
 func (a *VaultsAPIService) DeleteCredentialExecute(r ApiDeleteCredentialRequest) (*ResponseCredential, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseCredential
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseCredential
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VaultsAPIService.DeleteCredential")
@@ -543,8 +541,8 @@ func (a *VaultsAPIService) DeleteCredentialExecute(r ApiDeleteCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -554,8 +552,8 @@ func (a *VaultsAPIService) DeleteCredentialExecute(r ApiDeleteCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -565,18 +563,18 @@ func (a *VaultsAPIService) DeleteCredentialExecute(r ApiDeleteCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -593,9 +591,9 @@ func (a *VaultsAPIService) DeleteCredentialExecute(r ApiDeleteCredentialRequest)
 }
 
 type ApiDeleteVaultRequest struct {
-	ctx            context.Context
-	ApiService     *VaultsAPIService
-	id             string
+	ctx context.Context
+	ApiService *VaultsAPIService
+	id string
 	idempotencyKey *string
 }
 
@@ -613,27 +611,26 @@ DeleteVault 删除保管库
 
 DELETE /v1/vaults/:id：删除保管库并撤销其中全部凭据。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiDeleteVaultRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiDeleteVaultRequest
 */
 func (a *VaultsAPIService) DeleteVault(ctx context.Context, id string) ApiDeleteVaultRequest {
 	return ApiDeleteVaultRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseVaultDeleted
+//  @return ResponseVaultDeleted
 func (a *VaultsAPIService) DeleteVaultExecute(r ApiDeleteVaultRequest) (*ResponseVaultDeleted, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseVaultDeleted
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseVaultDeleted
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VaultsAPIService.DeleteVault")
@@ -711,8 +708,8 @@ func (a *VaultsAPIService) DeleteVaultExecute(r ApiDeleteVaultRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -722,8 +719,8 @@ func (a *VaultsAPIService) DeleteVaultExecute(r ApiDeleteVaultRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -733,18 +730,18 @@ func (a *VaultsAPIService) DeleteVaultExecute(r ApiDeleteVaultRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -761,9 +758,9 @@ func (a *VaultsAPIService) DeleteVaultExecute(r ApiDeleteVaultRequest) (*Respons
 }
 
 type ApiGetVaultRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *VaultsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetVaultRequest) Execute() (*ResponseVault, *http.Response, error) {
@@ -775,27 +772,26 @@ GetVault 查询保管库详情
 
 GET /v1/vaults/:id：读取一个保管库。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiGetVaultRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiGetVaultRequest
 */
 func (a *VaultsAPIService) GetVault(ctx context.Context, id string) ApiGetVaultRequest {
 	return ApiGetVaultRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseVault
+//  @return ResponseVault
 func (a *VaultsAPIService) GetVaultExecute(r ApiGetVaultRequest) (*ResponseVault, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseVault
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseVault
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VaultsAPIService.GetVault")
@@ -870,8 +866,8 @@ func (a *VaultsAPIService) GetVaultExecute(r ApiGetVaultRequest) (*ResponseVault
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -881,8 +877,8 @@ func (a *VaultsAPIService) GetVaultExecute(r ApiGetVaultRequest) (*ResponseVault
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -892,18 +888,18 @@ func (a *VaultsAPIService) GetVaultExecute(r ApiGetVaultRequest) (*ResponseVault
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -920,9 +916,9 @@ func (a *VaultsAPIService) GetVaultExecute(r ApiGetVaultRequest) (*ResponseVault
 }
 
 type ApiListCredentialsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *VaultsAPIService
-	id         string
+	id string
 }
 
 func (r ApiListCredentialsRequest) Execute() (*ResponseCredentialList, *http.Response, error) {
@@ -934,27 +930,26 @@ ListCredentials 查询凭据列表
 
 GET /v1/vaults/:id/credentials：列出保管库中的凭据。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiListCredentialsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiListCredentialsRequest
 */
 func (a *VaultsAPIService) ListCredentials(ctx context.Context, id string) ApiListCredentialsRequest {
 	return ApiListCredentialsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseCredentialList
+//  @return ResponseCredentialList
 func (a *VaultsAPIService) ListCredentialsExecute(r ApiListCredentialsRequest) (*ResponseCredentialList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseCredentialList
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseCredentialList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VaultsAPIService.ListCredentials")
@@ -1029,8 +1024,8 @@ func (a *VaultsAPIService) ListCredentialsExecute(r ApiListCredentialsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1040,8 +1035,8 @@ func (a *VaultsAPIService) ListCredentialsExecute(r ApiListCredentialsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1051,18 +1046,18 @@ func (a *VaultsAPIService) ListCredentialsExecute(r ApiListCredentialsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1079,7 +1074,7 @@ func (a *VaultsAPIService) ListCredentialsExecute(r ApiListCredentialsRequest) (
 }
 
 type ApiListVaultsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *VaultsAPIService
 }
 
@@ -1092,25 +1087,24 @@ ListVaults 查询保管库列表
 
 GET /v1/vaults：列出你的保管库。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListVaultsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListVaultsRequest
 */
 func (a *VaultsAPIService) ListVaults(ctx context.Context) ApiListVaultsRequest {
 	return ApiListVaultsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseVaultList
+//  @return ResponseVaultList
 func (a *VaultsAPIService) ListVaultsExecute(r ApiListVaultsRequest) (*ResponseVaultList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseVaultList
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseVaultList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VaultsAPIService.ListVaults")
@@ -1184,8 +1178,8 @@ func (a *VaultsAPIService) ListVaultsExecute(r ApiListVaultsRequest) (*ResponseV
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1195,18 +1189,18 @@ func (a *VaultsAPIService) ListVaultsExecute(r ApiListVaultsRequest) (*ResponseV
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1223,12 +1217,12 @@ func (a *VaultsAPIService) ListVaultsExecute(r ApiListVaultsRequest) (*ResponseV
 }
 
 type ApiUpdateCredentialRequest struct {
-	ctx                     context.Context
-	ApiService              *VaultsAPIService
-	id                      string
-	cid                     string
+	ctx context.Context
+	ApiService *VaultsAPIService
+	id string
+	cid string
 	requestCredentialUpdate *RequestCredentialUpdate
-	idempotencyKey          *string
+	idempotencyKey *string
 }
 
 func (r ApiUpdateCredentialRequest) RequestCredentialUpdate(requestCredentialUpdate RequestCredentialUpdate) ApiUpdateCredentialRequest {
@@ -1250,29 +1244,28 @@ UpdateCredential 更新凭据
 
 POST /v1/vaults/:id/credentials/:cid：改名或轮换 token。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@param cid
-	@return ApiUpdateCredentialRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @param cid
+ @return ApiUpdateCredentialRequest
 */
 func (a *VaultsAPIService) UpdateCredential(ctx context.Context, id string, cid string) ApiUpdateCredentialRequest {
 	return ApiUpdateCredentialRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		cid:        cid,
+		ctx: ctx,
+		id: id,
+		cid: cid,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseCredential
+//  @return ResponseCredential
 func (a *VaultsAPIService) UpdateCredentialExecute(r ApiUpdateCredentialRequest) (*ResponseCredential, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseCredential
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseCredential
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VaultsAPIService.UpdateCredential")
@@ -1356,8 +1349,8 @@ func (a *VaultsAPIService) UpdateCredentialExecute(r ApiUpdateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1367,8 +1360,8 @@ func (a *VaultsAPIService) UpdateCredentialExecute(r ApiUpdateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1378,8 +1371,8 @@ func (a *VaultsAPIService) UpdateCredentialExecute(r ApiUpdateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1389,8 +1382,8 @@ func (a *VaultsAPIService) UpdateCredentialExecute(r ApiUpdateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -1400,18 +1393,18 @@ func (a *VaultsAPIService) UpdateCredentialExecute(r ApiUpdateCredentialRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

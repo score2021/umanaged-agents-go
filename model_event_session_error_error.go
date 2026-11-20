@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,11 +21,11 @@ var _ MappedNullable = &EventSessionErrorError{}
 
 // EventSessionErrorError struct for EventSessionErrorError
 type EventSessionErrorError struct {
-	Type        string                            `json:"type"`
-	Code        *string                           `json:"code,omitempty"`
-	Message     string                            `json:"message"`
+	Type string `json:"type"`
+	Code *string `json:"code,omitempty"`
+	Message string `json:"message"`
 	RetryStatus EventSessionErrorErrorRetryStatus `json:"retry_status"`
-	Details     map[string]*interface{}           `json:"details,omitempty"`
+	Details map[string]*interface{} `json:"details,omitempty"`
 }
 
 type _EventSessionErrorError EventSessionErrorError
@@ -187,7 +187,7 @@ func (o *EventSessionErrorError) SetDetails(v map[string]*interface{}) {
 }
 
 func (o EventSessionErrorError) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,10 +223,10 @@ func (o *EventSessionErrorError) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -282,3 +282,5 @@ func (v *NullableEventSessionErrorError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

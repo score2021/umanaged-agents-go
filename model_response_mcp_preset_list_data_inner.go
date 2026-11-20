@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,18 +21,18 @@ var _ MappedNullable = &ResponseMcpPresetListDataInner{}
 
 // ResponseMcpPresetListDataInner struct for ResponseMcpPresetListDataInner
 type ResponseMcpPresetListDataInner struct {
-	Id               string        `json:"id"`
-	Type             string        `json:"type"`
-	Name             string        `json:"name"`
-	Url              string        `json:"url"`
-	Description      string        `json:"description"`
-	DocumentationUrl string        `json:"documentation_url"`
-	Source           string        `json:"source"`
-	Auth             string        `json:"auth"`
-	PermissionPolicy string        `json:"permission_policy"`
-	Tools            []interface{} `json:"tools"`
-	CredentialStatus NullOnly      `json:"credential_status"`
-	UpdatedAt        NullOnly      `json:"updated_at"`
+	Id string `json:"id"`
+	Type string `json:"type"`
+	Name string `json:"name"`
+	Url string `json:"url"`
+	Description string `json:"description"`
+	DocumentationUrl string `json:"documentation_url"`
+	Source string `json:"source"`
+	Auth string `json:"auth"`
+	PermissionPolicy string `json:"permission_policy"`
+	Tools []interface{} `json:"tools"`
+	CredentialStatus NullOnly `json:"credential_status"`
+	UpdatedAt NullOnly `json:"updated_at"`
 }
 
 type _ResponseMcpPresetListDataInner ResponseMcpPresetListDataInner
@@ -355,7 +355,7 @@ func (o *ResponseMcpPresetListDataInner) SetUpdatedAt(v NullOnly) {
 }
 
 func (o ResponseMcpPresetListDataInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -403,10 +403,10 @@ func (o *ResponseMcpPresetListDataInner) UnmarshalJSON(data []byte) (err error) 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -462,3 +462,5 @@ func (v *NullableResponseMcpPresetListDataInner) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

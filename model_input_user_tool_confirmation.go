@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,9 +21,9 @@ var _ MappedNullable = &InputUserToolConfirmation{}
 
 // InputUserToolConfirmation struct for InputUserToolConfirmation
 type InputUserToolConfirmation struct {
-	Type        string  `json:"type"`
-	ToolUseId   string  `json:"tool_use_id"`
-	Result      string  `json:"result"`
+	Type string `json:"type"`
+	ToolUseId string `json:"tool_use_id"`
+	Result string `json:"result"`
 	DenyMessage *string `json:"deny_message,omitempty"`
 }
 
@@ -154,7 +154,7 @@ func (o *InputUserToolConfirmation) SetDenyMessage(v string) {
 }
 
 func (o InputUserToolConfirmation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -187,10 +187,10 @@ func (o *InputUserToolConfirmation) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -246,3 +246,5 @@ func (v *NullableInputUserToolConfirmation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

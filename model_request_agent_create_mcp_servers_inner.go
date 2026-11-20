@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,11 +21,11 @@ var _ MappedNullable = &RequestAgentCreateMcpServersInner{}
 
 // RequestAgentCreateMcpServersInner struct for RequestAgentCreateMcpServersInner
 type RequestAgentCreateMcpServersInner struct {
-	Type   string  `json:"type"`
-	Name   string  `json:"name" validate:"regexp=^[A-Za-z0-9_-]{1\\,128}$"`
-	Url    string  `json:"url"`
+	Type string `json:"type"`
+	Name string `json:"name" validate:"regexp=^[A-Za-z0-9_-]{1\\,128}$"`
+	Url string `json:"url"`
 	Source *string `json:"source,omitempty"`
-	Auth   *string `json:"auth,omitempty"`
+	Auth *string `json:"auth,omitempty"`
 }
 
 type _RequestAgentCreateMcpServersInner RequestAgentCreateMcpServersInner
@@ -187,7 +187,7 @@ func (o *RequestAgentCreateMcpServersInner) SetAuth(v string) {
 }
 
 func (o RequestAgentCreateMcpServersInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,10 +223,10 @@ func (o *RequestAgentCreateMcpServersInner) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -282,3 +282,5 @@ func (v *NullableRequestAgentCreateMcpServersInner) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

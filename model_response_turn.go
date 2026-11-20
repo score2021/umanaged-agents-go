@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -20,12 +20,12 @@ var _ MappedNullable = &ResponseTurn{}
 
 // ResponseTurn struct for ResponseTurn
 type ResponseTurn struct {
-	InputEventId         string                            `json:"input_event_id"`
-	Status               string                            `json:"status"`
-	Answer               NullableString                    `json:"answer"`
-	ResponseEventId      NullableString                    `json:"response_event_id"`
-	Error                NullableResponseTurnError         `json:"error"`
-	PendingActions       []ResponseTurnPendingActionsInner `json:"pending_actions"`
+	InputEventId string `json:"input_event_id"`
+	Status string `json:"status"`
+	Answer NullableString `json:"answer"`
+	ResponseEventId NullableString `json:"response_event_id"`
+	Error NullableResponseTurnError `json:"error"`
+	PendingActions []ResponseTurnPendingActionsInner `json:"pending_actions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -205,7 +205,7 @@ func (o *ResponseTurn) SetPendingActions(v []ResponseTurnPendingActionsInner) {
 }
 
 func (o ResponseTurn) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -246,10 +246,10 @@ func (o *ResponseTurn) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -315,3 +315,5 @@ func (v *NullableResponseTurn) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

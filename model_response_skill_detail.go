@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -20,19 +20,19 @@ var _ MappedNullable = &ResponseSkillDetail{}
 
 // ResponseSkillDetail struct for ResponseSkillDetail
 type ResponseSkillDetail struct {
-	Id                   string                          `json:"id"`
-	Type                 string                          `json:"type"`
-	SourceType           string                          `json:"source_type"`
-	DisplayTitle         string                          `json:"display_title"`
-	LatestVersion        string                          `json:"latest_version"`
-	Name                 NullableString                  `json:"name"`
-	Description          NullableString                  `json:"description"`
-	Files                []ResponseSkillDetailFilesInner `json:"files"`
-	Source               ResponseSkillDetailSource       `json:"source"`
-	ProtectionEnabled    bool                            `json:"protection_enabled"`
-	PublicationCount     int64                           `json:"publication_count"`
-	CreatedAt            string                          `json:"created_at"`
-	UpdatedAt            string                          `json:"updated_at"`
+	Id string `json:"id"`
+	Type string `json:"type"`
+	SourceType string `json:"source_type"`
+	DisplayTitle string `json:"display_title"`
+	LatestVersion string `json:"latest_version"`
+	Name NullableString `json:"name"`
+	Description NullableString `json:"description"`
+	Files []ResponseSkillDetailFilesInner `json:"files"`
+	Source ResponseSkillDetailSource `json:"source"`
+	ProtectionEnabled bool `json:"protection_enabled"`
+	PublicationCount int64 `json:"publication_count"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -385,7 +385,7 @@ func (o *ResponseSkillDetail) SetUpdatedAt(v string) {
 }
 
 func (o ResponseSkillDetail) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -440,10 +440,10 @@ func (o *ResponseSkillDetail) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -516,3 +516,5 @@ func (v *NullableResponseSkillDetail) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

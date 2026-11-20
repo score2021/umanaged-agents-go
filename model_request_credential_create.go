@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -20,9 +20,9 @@ var _ MappedNullable = &RequestCredentialCreate{}
 
 // RequestCredentialCreate struct for RequestCredentialCreate
 type RequestCredentialCreate struct {
-	DisplayName          string                      `json:"display_name"`
-	McpServerUrl         string                      `json:"mcp_server_url"`
-	Auth                 RequestCredentialCreateAuth `json:"auth"`
+	DisplayName string `json:"display_name"`
+	McpServerUrl string `json:"mcp_server_url"`
+	Auth RequestCredentialCreateAuth `json:"auth"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,7 +121,7 @@ func (o *RequestCredentialCreate) SetAuth(v RequestCredentialCreateAuth) {
 }
 
 func (o RequestCredentialCreate) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,10 +156,10 @@ func (o *RequestCredentialCreate) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,3 +222,5 @@ func (v *NullableRequestCredentialCreate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -20,21 +20,21 @@ var _ MappedNullable = &ResponseSession{}
 
 // ResponseSession struct for ResponseSession
 type ResponseSession struct {
-	Id                   string                                       `json:"id"`
-	Type                 string                                       `json:"type"`
-	Status               string                                       `json:"status"`
-	Agent                ResponseSessionListDataInnerAgent            `json:"agent"`
-	EnvironmentId        string                                       `json:"environment_id"`
-	Title                NullableString                               `json:"title"`
-	Resources            []ResponseSessionListDataInnerResourcesInner `json:"resources"`
-	VaultIds             []string                                     `json:"vault_ids"`
-	CreatedBy            string                                       `json:"created_by"`
-	CreatedAt            string                                       `json:"created_at"`
-	UpdatedAt            string                                       `json:"updated_at"`
-	ExpiresAt            NullableString                               `json:"expires_at"`
-	ArchivedAt           NullableString                               `json:"archived_at"`
-	ArchivedBy           NullableString                               `json:"archived_by"`
-	Environment          *ResponseSessionListDataInnerEnvironment     `json:"environment,omitempty"`
+	Id string `json:"id"`
+	Type string `json:"type"`
+	Status string `json:"status"`
+	Agent ResponseSessionListDataInnerAgent `json:"agent"`
+	EnvironmentId string `json:"environment_id"`
+	Title NullableString `json:"title"`
+	Resources []ResponseSessionListDataInnerResourcesInner `json:"resources"`
+	VaultIds []string `json:"vault_ids"`
+	CreatedBy string `json:"created_by"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
+	ExpiresAt NullableString `json:"expires_at"`
+	ArchivedAt NullableString `json:"archived_at"`
+	ArchivedBy NullableString `json:"archived_by"`
+	Environment *ResponseSessionListDataInnerEnvironment `json:"environment,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -448,7 +448,7 @@ func (o *ResponseSession) SetEnvironment(v ResponseSessionListDataInnerEnvironme
 }
 
 func (o ResponseSession) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -508,10 +508,10 @@ func (o *ResponseSession) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -586,3 +586,5 @@ func (v *NullableResponseSession) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

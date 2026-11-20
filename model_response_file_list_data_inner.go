@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -11,8 +11,8 @@ API version: mvpp-public-v1-draft.1
 package umanagedagents
 
 import (
-	"bytes"
 	"encoding/json"
+	"bytes"
 	"fmt"
 )
 
@@ -21,19 +21,19 @@ var _ MappedNullable = &ResponseFileListDataInner{}
 
 // ResponseFileListDataInner struct for ResponseFileListDataInner
 type ResponseFileListDataInner struct {
-	Id           string                           `json:"id"`
-	Type         string                           `json:"type"`
-	Filename     string                           `json:"filename"`
-	MimeType     string                           `json:"mime_type"`
-	SizeBytes    int64                            `json:"size_bytes"`
-	Sha256       string                           `json:"sha256"`
-	Origin       string                           `json:"origin"`
-	InputEventId NullableString                   `json:"input_event_id"`
-	Downloadable bool                             `json:"downloadable"`
-	CreatedBy    string                           `json:"created_by"`
-	CreatedAt    string                           `json:"created_at"`
-	ExpiresAt    NullableString                   `json:"expires_at"`
-	Export       *ResponseFileListDataInnerExport `json:"export,omitempty"`
+	Id string `json:"id"`
+	Type string `json:"type"`
+	Filename string `json:"filename"`
+	MimeType string `json:"mime_type"`
+	SizeBytes int64 `json:"size_bytes"`
+	Sha256 string `json:"sha256"`
+	Origin string `json:"origin"`
+	InputEventId NullableString `json:"input_event_id"`
+	Downloadable bool `json:"downloadable"`
+	CreatedBy string `json:"created_by"`
+	CreatedAt string `json:"created_at"`
+	ExpiresAt NullableString `json:"expires_at"`
+	Export *ResponseFileListDataInnerExport `json:"export,omitempty"`
 }
 
 type _ResponseFileListDataInner ResponseFileListDataInner
@@ -392,7 +392,7 @@ func (o *ResponseFileListDataInner) SetExport(v ResponseFileListDataInnerExport)
 }
 
 func (o ResponseFileListDataInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -443,10 +443,10 @@ func (o *ResponseFileListDataInner) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -502,3 +502,5 @@ func (v *NullableResponseFileListDataInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

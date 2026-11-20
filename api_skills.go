@@ -1,7 +1,7 @@
 /*
-MVPP API
+Managed Agents API
 
-MVPP 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
+Managed Agents 公开与 SDK 支持的 /v1 接口。发送 SSE 后的会话错误通过事件返回。
 
 API version: mvpp-public-v1-draft.1
 */
@@ -16,19 +16,20 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
+	"os"
 )
+
 
 // SkillsAPIService SkillsAPI service
 type SkillsAPIService service
 
 type ApiCreateSkillRequest struct {
-	ctx               context.Context
-	ApiService        *SkillsAPIService
-	file              *os.File
-	idempotencyKey    *string
-	displayTitle      *string
+	ctx context.Context
+	ApiService *SkillsAPIService
+	file *os.File
+	idempotencyKey *string
+	displayTitle *string
 	protectionEnabled *string
 }
 
@@ -61,25 +62,24 @@ CreateSkill 上传 Skill
 
 POST /v1/skills：上传 ZIP 或 SKILL.md 创建 Skill。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateSkillRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateSkillRequest
 */
 func (a *SkillsAPIService) CreateSkill(ctx context.Context) ApiCreateSkillRequest {
 	return ApiCreateSkillRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillWrite
+//  @return ResponseSkillWrite
 func (a *SkillsAPIService) CreateSkillExecute(r ApiCreateSkillRequest) (*ResponseSkillWrite, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillWrite
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillWrite
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.CreateSkill")
@@ -117,8 +117,8 @@ func (a *SkillsAPIService) CreateSkillExecute(r ApiCreateSkillRequest) (*Respons
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "Idempotency-Key", r.idempotencyKey, "simple", "")
 	}
 	var fileLocalVarFormFileName string
-	var fileLocalVarFileName string
-	var fileLocalVarFileBytes []byte
+	var fileLocalVarFileName     string
+	var fileLocalVarFileBytes    []byte
 
 	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
@@ -180,8 +180,8 @@ func (a *SkillsAPIService) CreateSkillExecute(r ApiCreateSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -191,8 +191,8 @@ func (a *SkillsAPIService) CreateSkillExecute(r ApiCreateSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -202,8 +202,8 @@ func (a *SkillsAPIService) CreateSkillExecute(r ApiCreateSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -213,8 +213,8 @@ func (a *SkillsAPIService) CreateSkillExecute(r ApiCreateSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 413 {
@@ -224,18 +224,18 @@ func (a *SkillsAPIService) CreateSkillExecute(r ApiCreateSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -252,12 +252,12 @@ func (a *SkillsAPIService) CreateSkillExecute(r ApiCreateSkillRequest) (*Respons
 }
 
 type ApiCreateSkillVersionRequest struct {
-	ctx               context.Context
-	ApiService        *SkillsAPIService
-	id                string
-	file              *os.File
-	idempotencyKey    *string
-	displayTitle      *string
+	ctx context.Context
+	ApiService *SkillsAPIService
+	id string
+	file *os.File
+	idempotencyKey *string
+	displayTitle *string
 	protectionEnabled *string
 }
 
@@ -290,27 +290,26 @@ CreateSkillVersion 创建 Skill 新版本
 
 POST /v1/skills/:id/versions：上传新内容生成新版本。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiCreateSkillVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCreateSkillVersionRequest
 */
 func (a *SkillsAPIService) CreateSkillVersion(ctx context.Context, id string) ApiCreateSkillVersionRequest {
 	return ApiCreateSkillVersionRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillWrite
+//  @return ResponseSkillWrite
 func (a *SkillsAPIService) CreateSkillVersionExecute(r ApiCreateSkillVersionRequest) (*ResponseSkillWrite, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillWrite
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillWrite
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.CreateSkillVersion")
@@ -349,8 +348,8 @@ func (a *SkillsAPIService) CreateSkillVersionExecute(r ApiCreateSkillVersionRequ
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "Idempotency-Key", r.idempotencyKey, "simple", "")
 	}
 	var fileLocalVarFormFileName string
-	var fileLocalVarFileName string
-	var fileLocalVarFileBytes []byte
+	var fileLocalVarFileName     string
+	var fileLocalVarFileBytes    []byte
 
 	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
@@ -412,8 +411,8 @@ func (a *SkillsAPIService) CreateSkillVersionExecute(r ApiCreateSkillVersionRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -423,8 +422,8 @@ func (a *SkillsAPIService) CreateSkillVersionExecute(r ApiCreateSkillVersionRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -434,8 +433,8 @@ func (a *SkillsAPIService) CreateSkillVersionExecute(r ApiCreateSkillVersionRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -445,8 +444,8 @@ func (a *SkillsAPIService) CreateSkillVersionExecute(r ApiCreateSkillVersionRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 413 {
@@ -456,18 +455,18 @@ func (a *SkillsAPIService) CreateSkillVersionExecute(r ApiCreateSkillVersionRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -484,9 +483,9 @@ func (a *SkillsAPIService) CreateSkillVersionExecute(r ApiCreateSkillVersionRequ
 }
 
 type ApiDeleteSkillRequest struct {
-	ctx            context.Context
-	ApiService     *SkillsAPIService
-	id             string
+	ctx context.Context
+	ApiService *SkillsAPIService
+	id string
 	idempotencyKey *string
 }
 
@@ -504,27 +503,26 @@ DeleteSkill 删除 Skill
 
 DELETE /v1/skills/:id：删除自定义 Skill。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiDeleteSkillRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiDeleteSkillRequest
 */
 func (a *SkillsAPIService) DeleteSkill(ctx context.Context, id string) ApiDeleteSkillRequest {
 	return ApiDeleteSkillRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillDeleted
+//  @return ResponseSkillDeleted
 func (a *SkillsAPIService) DeleteSkillExecute(r ApiDeleteSkillRequest) (*ResponseSkillDeleted, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillDeleted
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillDeleted
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.DeleteSkill")
@@ -602,8 +600,8 @@ func (a *SkillsAPIService) DeleteSkillExecute(r ApiDeleteSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -613,8 +611,8 @@ func (a *SkillsAPIService) DeleteSkillExecute(r ApiDeleteSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -624,18 +622,18 @@ func (a *SkillsAPIService) DeleteSkillExecute(r ApiDeleteSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -652,10 +650,10 @@ func (a *SkillsAPIService) DeleteSkillExecute(r ApiDeleteSkillRequest) (*Respons
 }
 
 type ApiDownloadSkillVersionRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *SkillsAPIService
-	id         string
-	version    string
+	id string
+	version string
 }
 
 func (r ApiDownloadSkillVersionRequest) Execute() (*os.File, *http.Response, error) {
@@ -667,29 +665,28 @@ DownloadSkillVersion 下载指定版本的 Skill
 
 GET /v1/skills/:id/versions/:version/content：下载版本 ZIP。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@param version
-	@return ApiDownloadSkillVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @param version
+ @return ApiDownloadSkillVersionRequest
 */
 func (a *SkillsAPIService) DownloadSkillVersion(ctx context.Context, id string, version string) ApiDownloadSkillVersionRequest {
 	return ApiDownloadSkillVersionRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		version:    version,
+		ctx: ctx,
+		id: id,
+		version: version,
 	}
 }
 
 // Execute executes the request
-//
-//	@return *os.File
+//  @return *os.File
 func (a *SkillsAPIService) DownloadSkillVersionExecute(r ApiDownloadSkillVersionRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *os.File
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.DownloadSkillVersion")
@@ -765,8 +762,8 @@ func (a *SkillsAPIService) DownloadSkillVersionExecute(r ApiDownloadSkillVersion
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -776,8 +773,8 @@ func (a *SkillsAPIService) DownloadSkillVersionExecute(r ApiDownloadSkillVersion
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -787,18 +784,18 @@ func (a *SkillsAPIService) DownloadSkillVersionExecute(r ApiDownloadSkillVersion
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -815,9 +812,9 @@ func (a *SkillsAPIService) DownloadSkillVersionExecute(r ApiDownloadSkillVersion
 }
 
 type ApiGetSkillRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *SkillsAPIService
-	id         string
+	id string
 }
 
 func (r ApiGetSkillRequest) Execute() (*ResponseSkillDetail, *http.Response, error) {
@@ -829,27 +826,26 @@ GetSkill 查询 Skill 详情
 
 GET /v1/skills/:id：读取 Skill 及其发布记录。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiGetSkillRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiGetSkillRequest
 */
 func (a *SkillsAPIService) GetSkill(ctx context.Context, id string) ApiGetSkillRequest {
 	return ApiGetSkillRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillDetail
+//  @return ResponseSkillDetail
 func (a *SkillsAPIService) GetSkillExecute(r ApiGetSkillRequest) (*ResponseSkillDetail, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillDetail
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.GetSkill")
@@ -924,8 +920,8 @@ func (a *SkillsAPIService) GetSkillExecute(r ApiGetSkillRequest) (*ResponseSkill
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -935,8 +931,8 @@ func (a *SkillsAPIService) GetSkillExecute(r ApiGetSkillRequest) (*ResponseSkill
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -946,18 +942,18 @@ func (a *SkillsAPIService) GetSkillExecute(r ApiGetSkillRequest) (*ResponseSkill
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -974,10 +970,10 @@ func (a *SkillsAPIService) GetSkillExecute(r ApiGetSkillRequest) (*ResponseSkill
 }
 
 type ApiGetSkillVersionRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *SkillsAPIService
-	id         string
-	version    string
+	id string
+	version string
 }
 
 func (r ApiGetSkillVersionRequest) Execute() (*ResponseSkillVersionContent, *http.Response, error) {
@@ -989,29 +985,28 @@ GetSkillVersion 查询指定版本的 Skill
 
 GET /v1/skills/:id/versions/:version：读取一个版本的文件内容。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@param version
-	@return ApiGetSkillVersionRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @param version
+ @return ApiGetSkillVersionRequest
 */
 func (a *SkillsAPIService) GetSkillVersion(ctx context.Context, id string, version string) ApiGetSkillVersionRequest {
 	return ApiGetSkillVersionRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		version:    version,
+		ctx: ctx,
+		id: id,
+		version: version,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillVersionContent
+//  @return ResponseSkillVersionContent
 func (a *SkillsAPIService) GetSkillVersionExecute(r ApiGetSkillVersionRequest) (*ResponseSkillVersionContent, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillVersionContent
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillVersionContent
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.GetSkillVersion")
@@ -1087,8 +1082,8 @@ func (a *SkillsAPIService) GetSkillVersionExecute(r ApiGetSkillVersionRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1098,8 +1093,8 @@ func (a *SkillsAPIService) GetSkillVersionExecute(r ApiGetSkillVersionRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1109,18 +1104,18 @@ func (a *SkillsAPIService) GetSkillVersionExecute(r ApiGetSkillVersionRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1137,10 +1132,10 @@ func (a *SkillsAPIService) GetSkillVersionExecute(r ApiGetSkillVersionRequest) (
 }
 
 type ApiImportGithubSkillsRequest struct {
-	ctx                          context.Context
-	ApiService                   *SkillsAPIService
+	ctx context.Context
+	ApiService *SkillsAPIService
 	requestImportGithubSkillsApi *RequestImportGithubSkillsApi
-	idempotencyKey               *string
+	idempotencyKey *string
 }
 
 func (r ApiImportGithubSkillsRequest) RequestImportGithubSkillsApi(requestImportGithubSkillsApi RequestImportGithubSkillsApi) ApiImportGithubSkillsRequest {
@@ -1162,25 +1157,24 @@ ImportGithubSkills 导入 GitHub Skill
 
 POST /v1/skills/github/import：按扫描结果导入选中的 Skill。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiImportGithubSkillsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiImportGithubSkillsRequest
 */
 func (a *SkillsAPIService) ImportGithubSkills(ctx context.Context) ApiImportGithubSkillsRequest {
 	return ApiImportGithubSkillsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseGithubImport
+//  @return ResponseGithubImport
 func (a *SkillsAPIService) ImportGithubSkillsExecute(r ApiImportGithubSkillsRequest) (*ResponseGithubImport, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseGithubImport
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseGithubImport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.ImportGithubSkills")
@@ -1262,8 +1256,8 @@ func (a *SkillsAPIService) ImportGithubSkillsExecute(r ApiImportGithubSkillsRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1273,8 +1267,8 @@ func (a *SkillsAPIService) ImportGithubSkillsExecute(r ApiImportGithubSkillsRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1284,8 +1278,8 @@ func (a *SkillsAPIService) ImportGithubSkillsExecute(r ApiImportGithubSkillsRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 413 {
@@ -1295,8 +1289,8 @@ func (a *SkillsAPIService) ImportGithubSkillsExecute(r ApiImportGithubSkillsRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 503 {
@@ -1306,18 +1300,18 @@ func (a *SkillsAPIService) ImportGithubSkillsExecute(r ApiImportGithubSkillsRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1334,9 +1328,9 @@ func (a *SkillsAPIService) ImportGithubSkillsExecute(r ApiImportGithubSkillsRequ
 }
 
 type ApiListSkillAgentsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *SkillsAPIService
-	id         string
+	id string
 }
 
 func (r ApiListSkillAgentsRequest) Execute() (*ResponseSkillAgentList, *http.Response, error) {
@@ -1348,27 +1342,26 @@ ListSkillAgents 查询使用 Skill 的 Agent
 
 GET /v1/skills/:id/agents：列出最新版本绑定此 Skill 的 Agent，以及它们是否仍固定在旧版本。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiListSkillAgentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiListSkillAgentsRequest
 */
 func (a *SkillsAPIService) ListSkillAgents(ctx context.Context, id string) ApiListSkillAgentsRequest {
 	return ApiListSkillAgentsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillAgentList
+//  @return ResponseSkillAgentList
 func (a *SkillsAPIService) ListSkillAgentsExecute(r ApiListSkillAgentsRequest) (*ResponseSkillAgentList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillAgentList
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillAgentList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.ListSkillAgents")
@@ -1443,8 +1436,8 @@ func (a *SkillsAPIService) ListSkillAgentsExecute(r ApiListSkillAgentsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1454,8 +1447,8 @@ func (a *SkillsAPIService) ListSkillAgentsExecute(r ApiListSkillAgentsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1465,18 +1458,18 @@ func (a *SkillsAPIService) ListSkillAgentsExecute(r ApiListSkillAgentsRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1493,11 +1486,11 @@ func (a *SkillsAPIService) ListSkillAgentsExecute(r ApiListSkillAgentsRequest) (
 }
 
 type ApiListSkillVersionsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *SkillsAPIService
-	id         string
-	limit      *int64
-	page       *string
+	id string
+	limit *int64
+	page *string
 }
 
 func (r ApiListSkillVersionsRequest) Limit(limit int64) ApiListSkillVersionsRequest {
@@ -1519,27 +1512,26 @@ ListSkillVersions 查询 Skill 版本列表
 
 GET /v1/skills/:id/versions：按发布顺序倒序列出版本。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiListSkillVersionsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiListSkillVersionsRequest
 */
 func (a *SkillsAPIService) ListSkillVersions(ctx context.Context, id string) ApiListSkillVersionsRequest {
 	return ApiListSkillVersionsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillVersionList
+//  @return ResponseSkillVersionList
 func (a *SkillsAPIService) ListSkillVersionsExecute(r ApiListSkillVersionsRequest) (*ResponseSkillVersionList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillVersionList
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillVersionList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.ListSkillVersions")
@@ -1624,8 +1616,8 @@ func (a *SkillsAPIService) ListSkillVersionsExecute(r ApiListSkillVersionsReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1635,8 +1627,8 @@ func (a *SkillsAPIService) ListSkillVersionsExecute(r ApiListSkillVersionsReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1646,18 +1638,18 @@ func (a *SkillsAPIService) ListSkillVersionsExecute(r ApiListSkillVersionsReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1674,11 +1666,11 @@ func (a *SkillsAPIService) ListSkillVersionsExecute(r ApiListSkillVersionsReques
 }
 
 type ApiListSkillsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *SkillsAPIService
-	limit      *int64
-	page       *string
-	source     *string
+	limit *int64
+	page *string
+	source *string
 }
 
 func (r ApiListSkillsRequest) Limit(limit int64) ApiListSkillsRequest {
@@ -1705,25 +1697,24 @@ ListSkills 查询 Skill 列表
 
 GET /v1/skills：列出项目的自定义 Skill 或平台预置 Skill。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListSkillsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListSkillsRequest
 */
 func (a *SkillsAPIService) ListSkills(ctx context.Context) ApiListSkillsRequest {
 	return ApiListSkillsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillList
+//  @return ResponseSkillList
 func (a *SkillsAPIService) ListSkillsExecute(r ApiListSkillsRequest) (*ResponseSkillList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillList
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.ListSkills")
@@ -1814,8 +1805,8 @@ func (a *SkillsAPIService) ListSkillsExecute(r ApiListSkillsRequest) (*ResponseS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1825,8 +1816,8 @@ func (a *SkillsAPIService) ListSkillsExecute(r ApiListSkillsRequest) (*ResponseS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1836,18 +1827,18 @@ func (a *SkillsAPIService) ListSkillsExecute(r ApiListSkillsRequest) (*ResponseS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -1864,11 +1855,11 @@ func (a *SkillsAPIService) ListSkillsExecute(r ApiListSkillsRequest) (*ResponseS
 }
 
 type ApiRollbackSkillRequest struct {
-	ctx                     context.Context
-	ApiService              *SkillsAPIService
-	id                      string
+	ctx context.Context
+	ApiService *SkillsAPIService
+	id string
 	requestRollbackSkillApi *RequestRollbackSkillApi
-	idempotencyKey          *string
+	idempotencyKey *string
 }
 
 func (r ApiRollbackSkillRequest) RequestRollbackSkillApi(requestRollbackSkillApi RequestRollbackSkillApi) ApiRollbackSkillRequest {
@@ -1890,27 +1881,26 @@ RollbackSkill 回滚 Skill
 
 POST /v1/skills/:id/rollback：把历史版本重新设为最新版本。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiRollbackSkillRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiRollbackSkillRequest
 */
 func (a *SkillsAPIService) RollbackSkill(ctx context.Context, id string) ApiRollbackSkillRequest {
 	return ApiRollbackSkillRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillRollback
+//  @return ResponseSkillRollback
 func (a *SkillsAPIService) RollbackSkillExecute(r ApiRollbackSkillRequest) (*ResponseSkillRollback, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillRollback
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillRollback
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.RollbackSkill")
@@ -1993,8 +1983,8 @@ func (a *SkillsAPIService) RollbackSkillExecute(r ApiRollbackSkillRequest) (*Res
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2004,8 +1994,8 @@ func (a *SkillsAPIService) RollbackSkillExecute(r ApiRollbackSkillRequest) (*Res
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2015,8 +2005,8 @@ func (a *SkillsAPIService) RollbackSkillExecute(r ApiRollbackSkillRequest) (*Res
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2026,18 +2016,18 @@ func (a *SkillsAPIService) RollbackSkillExecute(r ApiRollbackSkillRequest) (*Res
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2054,8 +2044,8 @@ func (a *SkillsAPIService) RollbackSkillExecute(r ApiRollbackSkillRequest) (*Res
 }
 
 type ApiScanGithubSkillsRequest struct {
-	ctx                        context.Context
-	ApiService                 *SkillsAPIService
+	ctx context.Context
+	ApiService *SkillsAPIService
 	requestScanGithubSkillsApi *RequestScanGithubSkillsApi
 }
 
@@ -2073,25 +2063,24 @@ ScanGithubSkills 扫描 GitHub Skill
 
 POST /v1/skills/github/scan：列出公开仓库中的 Skill 候选。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiScanGithubSkillsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiScanGithubSkillsRequest
 */
 func (a *SkillsAPIService) ScanGithubSkills(ctx context.Context) ApiScanGithubSkillsRequest {
 	return ApiScanGithubSkillsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseGithubScan
+//  @return ResponseGithubScan
 func (a *SkillsAPIService) ScanGithubSkillsExecute(r ApiScanGithubSkillsRequest) (*ResponseGithubScan, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseGithubScan
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseGithubScan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.ScanGithubSkills")
@@ -2170,8 +2159,8 @@ func (a *SkillsAPIService) ScanGithubSkillsExecute(r ApiScanGithubSkillsRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2181,8 +2170,8 @@ func (a *SkillsAPIService) ScanGithubSkillsExecute(r ApiScanGithubSkillsRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2192,8 +2181,8 @@ func (a *SkillsAPIService) ScanGithubSkillsExecute(r ApiScanGithubSkillsRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 413 {
@@ -2203,8 +2192,8 @@ func (a *SkillsAPIService) ScanGithubSkillsExecute(r ApiScanGithubSkillsRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 503 {
@@ -2214,18 +2203,18 @@ func (a *SkillsAPIService) ScanGithubSkillsExecute(r ApiScanGithubSkillsRequest)
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2242,10 +2231,10 @@ func (a *SkillsAPIService) ScanGithubSkillsExecute(r ApiScanGithubSkillsRequest)
 }
 
 type ApiUpdateSkillRequest struct {
-	ctx                context.Context
-	ApiService         *SkillsAPIService
-	id                 string
-	idempotencyKey     *string
+	ctx context.Context
+	ApiService *SkillsAPIService
+	id string
+	idempotencyKey *string
 	updateSkillRequest *UpdateSkillRequest
 }
 
@@ -2268,27 +2257,26 @@ UpdateSkill 更新 Skill 设置
 
 POST /v1/skills/:id：修改显示名称或内容保护。
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiUpdateSkillRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiUpdateSkillRequest
 */
 func (a *SkillsAPIService) UpdateSkill(ctx context.Context, id string) ApiUpdateSkillRequest {
 	return ApiUpdateSkillRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResponseSkillDetail
+//  @return ResponseSkillDetail
 func (a *SkillsAPIService) UpdateSkillExecute(r ApiUpdateSkillRequest) (*ResponseSkillDetail, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResponseSkillDetail
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResponseSkillDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SkillsAPIService.UpdateSkill")
@@ -2368,8 +2356,8 @@ func (a *SkillsAPIService) UpdateSkillExecute(r ApiUpdateSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2379,8 +2367,8 @@ func (a *SkillsAPIService) UpdateSkillExecute(r ApiUpdateSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2390,8 +2378,8 @@ func (a *SkillsAPIService) UpdateSkillExecute(r ApiUpdateSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2401,18 +2389,18 @@ func (a *SkillsAPIService) UpdateSkillExecute(r ApiUpdateSkillRequest) (*Respons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-		newErr.model = v
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 

@@ -12,7 +12,6 @@ package umanagedagents
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,10 @@ type ResponseStorageBinding struct {
 	Prefix string `json:"prefix"`
 	Purpose string `json:"purpose"`
 	CreatedAt string `json:"created_at"`
+	References *ResponseStorageBindingListDataInnerReferences `json:"references,omitempty"`
+	Capabilities NullableResponseStorageBindingListDataInnerCapabilities `json:"capabilities"`
+	VerifiedAt NullableString `json:"verified_at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResponseStorageBinding ResponseStorageBinding
@@ -37,7 +40,7 @@ type _ResponseStorageBinding ResponseStorageBinding
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResponseStorageBinding(id string, type_ string, name string, endpoint string, bucket string, prefix string, purpose string, createdAt string) *ResponseStorageBinding {
+func NewResponseStorageBinding(id string, type_ string, name string, endpoint string, bucket string, prefix string, purpose string, createdAt string, capabilities NullableResponseStorageBindingListDataInnerCapabilities, verifiedAt NullableString) *ResponseStorageBinding {
 	this := ResponseStorageBinding{}
 	this.Id = id
 	this.Type = type_
@@ -47,6 +50,8 @@ func NewResponseStorageBinding(id string, type_ string, name string, endpoint st
 	this.Prefix = prefix
 	this.Purpose = purpose
 	this.CreatedAt = createdAt
+	this.Capabilities = capabilities
+	this.VerifiedAt = verifiedAt
 	return &this
 }
 
@@ -250,6 +255,90 @@ func (o *ResponseStorageBinding) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
+// GetReferences returns the References field value if set, zero value otherwise.
+func (o *ResponseStorageBinding) GetReferences() ResponseStorageBindingListDataInnerReferences {
+	if o == nil || IsNil(o.References) {
+		var ret ResponseStorageBindingListDataInnerReferences
+		return ret
+	}
+	return *o.References
+}
+
+// GetReferencesOk returns a tuple with the References field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseStorageBinding) GetReferencesOk() (*ResponseStorageBindingListDataInnerReferences, bool) {
+	if o == nil || IsNil(o.References) {
+		return nil, false
+	}
+	return o.References, true
+}
+
+// HasReferences returns a boolean if a field has been set.
+func (o *ResponseStorageBinding) HasReferences() bool {
+	if o != nil && !IsNil(o.References) {
+		return true
+	}
+
+	return false
+}
+
+// SetReferences gets a reference to the given ResponseStorageBindingListDataInnerReferences and assigns it to the References field.
+func (o *ResponseStorageBinding) SetReferences(v ResponseStorageBindingListDataInnerReferences) {
+	o.References = &v
+}
+
+// GetCapabilities returns the Capabilities field value
+// If the value is explicit nil, the zero value for ResponseStorageBindingListDataInnerCapabilities will be returned
+func (o *ResponseStorageBinding) GetCapabilities() ResponseStorageBindingListDataInnerCapabilities {
+	if o == nil || o.Capabilities.Get() == nil {
+		var ret ResponseStorageBindingListDataInnerCapabilities
+		return ret
+	}
+
+	return *o.Capabilities.Get()
+}
+
+// GetCapabilitiesOk returns a tuple with the Capabilities field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResponseStorageBinding) GetCapabilitiesOk() (*ResponseStorageBindingListDataInnerCapabilities, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Capabilities.Get(), o.Capabilities.IsSet()
+}
+
+// SetCapabilities sets field value
+func (o *ResponseStorageBinding) SetCapabilities(v ResponseStorageBindingListDataInnerCapabilities) {
+	o.Capabilities.Set(&v)
+}
+
+// GetVerifiedAt returns the VerifiedAt field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ResponseStorageBinding) GetVerifiedAt() string {
+	if o == nil || o.VerifiedAt.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.VerifiedAt.Get()
+}
+
+// GetVerifiedAtOk returns a tuple with the VerifiedAt field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResponseStorageBinding) GetVerifiedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VerifiedAt.Get(), o.VerifiedAt.IsSet()
+}
+
+// SetVerifiedAt sets field value
+func (o *ResponseStorageBinding) SetVerifiedAt(v string) {
+	o.VerifiedAt.Set(&v)
+}
+
 func (o ResponseStorageBinding) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -268,6 +357,16 @@ func (o ResponseStorageBinding) ToMap() (map[string]interface{}, error) {
 	toSerialize["prefix"] = o.Prefix
 	toSerialize["purpose"] = o.Purpose
 	toSerialize["created_at"] = o.CreatedAt
+	if !IsNil(o.References) {
+		toSerialize["references"] = o.References
+	}
+	toSerialize["capabilities"] = o.Capabilities.Get()
+	toSerialize["verified_at"] = o.VerifiedAt.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -284,6 +383,8 @@ func (o *ResponseStorageBinding) UnmarshalJSON(data []byte) (err error) {
 		"prefix",
 		"purpose",
 		"created_at",
+		"capabilities",
+		"verified_at",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -302,15 +403,30 @@ func (o *ResponseStorageBinding) UnmarshalJSON(data []byte) (err error) {
 
 	varResponseStorageBinding := _ResponseStorageBinding{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResponseStorageBinding)
+	err = json.Unmarshal(data, &varResponseStorageBinding)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResponseStorageBinding(varResponseStorageBinding)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "endpoint")
+		delete(additionalProperties, "bucket")
+		delete(additionalProperties, "prefix")
+		delete(additionalProperties, "purpose")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "references")
+		delete(additionalProperties, "capabilities")
+		delete(additionalProperties, "verified_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

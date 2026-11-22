@@ -14,13 +14,15 @@ import (
 
 // Client holds the generated operations and the authentication context for Managed Agents.
 type Client struct {
-	API *APIClient
-	key string
+	API    *APIClient
+	key    string
+	stream *http.Client // no overall timeout: SSE subscriptions and upload parts follow the caller's context
 }
 
 // NewClient reads MANAGED_AGENTS_API_URL and MANAGED_AGENTS_API_KEY (then the legacy MVPP_* names) when its arguments
-// are empty. There is no built-in API address (#481).
-func NewClient(baseURL, apiKey string) (*Client, error) {
+// are empty. There is no built-in API address (#481). A private CA is read from WithCAFile or MANAGED_AGENTS_CA_FILE
+// (then MVPP_CA_FILE).
+func NewClient(baseURL, apiKey string, opts ...Option) (*Client, error) {
 	if baseURL == "" {
 		baseURL = env("API_URL")
 	}
@@ -38,16 +40,20 @@ func NewClient(baseURL, apiKey string) (*Client, error) {
 		target.Hostname() == "" || target.User != nil || target.RawQuery != "" || target.Fragment != "" {
 		return nil, errors.New("base URL must be an HTTP(S) API root")
 	}
+	o := options{caFile: env("CA_FILE"), timeout: 30 * time.Second}
+	for _, opt := range opts {
+		opt(&o)
+	}
+	transport, err := transportFor(o.caFile)
+	if err != nil {
+		return nil, err
+	}
 	cfg := NewConfiguration()
 	cfg.Servers = ServerConfigurations{{URL: strings.TrimRight(baseURL, "/")}}
-	cfg.HTTPClient = &http.Client{
-		Timeout:   30 * time.Second,
-		Transport: retryTransport{base: http.DefaultTransport},
-		CheckRedirect: func(_ *http.Request, _ []*http.Request) error {
-			return http.ErrUseLastResponse
-		},
-	}
-	return &Client{API: NewAPIClient(cfg), key: apiKey}, nil
+	cfg.UserAgent = "umanaged-agents-go/" + strings.TrimPrefix(strings.Split(cfg.UserAgent, "/")[1], "v")
+	cfg.HTTPClient = &http.Client{Timeout: o.timeout, Transport: retryTransport{base: transport}, CheckRedirect: noRedirect}
+	stream := &http.Client{Transport: transport, CheckRedirect: noRedirect}
+	return &Client{API: NewAPIClient(cfg), key: apiKey, stream: stream}, nil
 }
 
 // env returns MANAGED_AGENTS_<name>, falling back to the legacy MVPP_<name>; an empty value counts as unset.

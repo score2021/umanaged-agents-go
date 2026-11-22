@@ -29,6 +29,9 @@ type ResponseStorageBindingListDataInner struct {
 	Prefix string `json:"prefix"`
 	Purpose string `json:"purpose"`
 	CreatedAt string `json:"created_at"`
+	References *ResponseStorageBindingListDataInnerReferences `json:"references,omitempty"`
+	Capabilities NullableResponseStorageBindingListDataInnerCapabilities `json:"capabilities"`
+	VerifiedAt NullableString `json:"verified_at"`
 }
 
 type _ResponseStorageBindingListDataInner ResponseStorageBindingListDataInner
@@ -37,7 +40,7 @@ type _ResponseStorageBindingListDataInner ResponseStorageBindingListDataInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResponseStorageBindingListDataInner(id string, type_ string, name string, endpoint string, bucket string, prefix string, purpose string, createdAt string) *ResponseStorageBindingListDataInner {
+func NewResponseStorageBindingListDataInner(id string, type_ string, name string, endpoint string, bucket string, prefix string, purpose string, createdAt string, capabilities NullableResponseStorageBindingListDataInnerCapabilities, verifiedAt NullableString) *ResponseStorageBindingListDataInner {
 	this := ResponseStorageBindingListDataInner{}
 	this.Id = id
 	this.Type = type_
@@ -47,6 +50,8 @@ func NewResponseStorageBindingListDataInner(id string, type_ string, name string
 	this.Prefix = prefix
 	this.Purpose = purpose
 	this.CreatedAt = createdAt
+	this.Capabilities = capabilities
+	this.VerifiedAt = verifiedAt
 	return &this
 }
 
@@ -250,6 +255,90 @@ func (o *ResponseStorageBindingListDataInner) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
+// GetReferences returns the References field value if set, zero value otherwise.
+func (o *ResponseStorageBindingListDataInner) GetReferences() ResponseStorageBindingListDataInnerReferences {
+	if o == nil || IsNil(o.References) {
+		var ret ResponseStorageBindingListDataInnerReferences
+		return ret
+	}
+	return *o.References
+}
+
+// GetReferencesOk returns a tuple with the References field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseStorageBindingListDataInner) GetReferencesOk() (*ResponseStorageBindingListDataInnerReferences, bool) {
+	if o == nil || IsNil(o.References) {
+		return nil, false
+	}
+	return o.References, true
+}
+
+// HasReferences returns a boolean if a field has been set.
+func (o *ResponseStorageBindingListDataInner) HasReferences() bool {
+	if o != nil && !IsNil(o.References) {
+		return true
+	}
+
+	return false
+}
+
+// SetReferences gets a reference to the given ResponseStorageBindingListDataInnerReferences and assigns it to the References field.
+func (o *ResponseStorageBindingListDataInner) SetReferences(v ResponseStorageBindingListDataInnerReferences) {
+	o.References = &v
+}
+
+// GetCapabilities returns the Capabilities field value
+// If the value is explicit nil, the zero value for ResponseStorageBindingListDataInnerCapabilities will be returned
+func (o *ResponseStorageBindingListDataInner) GetCapabilities() ResponseStorageBindingListDataInnerCapabilities {
+	if o == nil || o.Capabilities.Get() == nil {
+		var ret ResponseStorageBindingListDataInnerCapabilities
+		return ret
+	}
+
+	return *o.Capabilities.Get()
+}
+
+// GetCapabilitiesOk returns a tuple with the Capabilities field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResponseStorageBindingListDataInner) GetCapabilitiesOk() (*ResponseStorageBindingListDataInnerCapabilities, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Capabilities.Get(), o.Capabilities.IsSet()
+}
+
+// SetCapabilities sets field value
+func (o *ResponseStorageBindingListDataInner) SetCapabilities(v ResponseStorageBindingListDataInnerCapabilities) {
+	o.Capabilities.Set(&v)
+}
+
+// GetVerifiedAt returns the VerifiedAt field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ResponseStorageBindingListDataInner) GetVerifiedAt() string {
+	if o == nil || o.VerifiedAt.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.VerifiedAt.Get()
+}
+
+// GetVerifiedAtOk returns a tuple with the VerifiedAt field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResponseStorageBindingListDataInner) GetVerifiedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VerifiedAt.Get(), o.VerifiedAt.IsSet()
+}
+
+// SetVerifiedAt sets field value
+func (o *ResponseStorageBindingListDataInner) SetVerifiedAt(v string) {
+	o.VerifiedAt.Set(&v)
+}
+
 func (o ResponseStorageBindingListDataInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -268,6 +357,11 @@ func (o ResponseStorageBindingListDataInner) ToMap() (map[string]interface{}, er
 	toSerialize["prefix"] = o.Prefix
 	toSerialize["purpose"] = o.Purpose
 	toSerialize["created_at"] = o.CreatedAt
+	if !IsNil(o.References) {
+		toSerialize["references"] = o.References
+	}
+	toSerialize["capabilities"] = o.Capabilities.Get()
+	toSerialize["verified_at"] = o.VerifiedAt.Get()
 	return toSerialize, nil
 }
 
@@ -284,6 +378,8 @@ func (o *ResponseStorageBindingListDataInner) UnmarshalJSON(data []byte) (err er
 		"prefix",
 		"purpose",
 		"created_at",
+		"capabilities",
+		"verified_at",
 	}
 
 	allProperties := make(map[string]interface{})

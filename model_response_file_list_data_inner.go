@@ -27,6 +27,8 @@ type ResponseFileListDataInner struct {
 	MimeType string `json:"mime_type"`
 	SizeBytes int64 `json:"size_bytes"`
 	Sha256 string `json:"sha256"`
+	OwnKey bool `json:"own_key"`
+	SessionId NullableString `json:"session_id"`
 	Origin string `json:"origin"`
 	InputEventId NullableString `json:"input_event_id"`
 	Downloadable bool `json:"downloadable"`
@@ -34,6 +36,7 @@ type ResponseFileListDataInner struct {
 	CreatedAt string `json:"created_at"`
 	ExpiresAt NullableString `json:"expires_at"`
 	Export *ResponseFileListDataInnerExport `json:"export,omitempty"`
+	Import *ResponseFileListDataInnerImport `json:"import,omitempty"`
 }
 
 type _ResponseFileListDataInner ResponseFileListDataInner
@@ -42,7 +45,7 @@ type _ResponseFileListDataInner ResponseFileListDataInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResponseFileListDataInner(id string, type_ string, filename string, mimeType string, sizeBytes int64, sha256 string, origin string, inputEventId NullableString, downloadable bool, createdBy string, createdAt string, expiresAt NullableString) *ResponseFileListDataInner {
+func NewResponseFileListDataInner(id string, type_ string, filename string, mimeType string, sizeBytes int64, sha256 string, ownKey bool, sessionId NullableString, origin string, inputEventId NullableString, downloadable bool, createdBy string, createdAt string, expiresAt NullableString) *ResponseFileListDataInner {
 	this := ResponseFileListDataInner{}
 	this.Id = id
 	this.Type = type_
@@ -50,6 +53,8 @@ func NewResponseFileListDataInner(id string, type_ string, filename string, mime
 	this.MimeType = mimeType
 	this.SizeBytes = sizeBytes
 	this.Sha256 = sha256
+	this.OwnKey = ownKey
+	this.SessionId = sessionId
 	this.Origin = origin
 	this.InputEventId = inputEventId
 	this.Downloadable = downloadable
@@ -209,6 +214,56 @@ func (o *ResponseFileListDataInner) GetSha256Ok() (*string, bool) {
 // SetSha256 sets field value
 func (o *ResponseFileListDataInner) SetSha256(v string) {
 	o.Sha256 = v
+}
+
+// GetOwnKey returns the OwnKey field value
+func (o *ResponseFileListDataInner) GetOwnKey() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.OwnKey
+}
+
+// GetOwnKeyOk returns a tuple with the OwnKey field value
+// and a boolean to check if the value has been set.
+func (o *ResponseFileListDataInner) GetOwnKeyOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OwnKey, true
+}
+
+// SetOwnKey sets field value
+func (o *ResponseFileListDataInner) SetOwnKey(v bool) {
+	o.OwnKey = v
+}
+
+// GetSessionId returns the SessionId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ResponseFileListDataInner) GetSessionId() string {
+	if o == nil || o.SessionId.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.SessionId.Get()
+}
+
+// GetSessionIdOk returns a tuple with the SessionId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResponseFileListDataInner) GetSessionIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SessionId.Get(), o.SessionId.IsSet()
+}
+
+// SetSessionId sets field value
+func (o *ResponseFileListDataInner) SetSessionId(v string) {
+	o.SessionId.Set(&v)
 }
 
 // GetOrigin returns the Origin field value
@@ -391,6 +446,38 @@ func (o *ResponseFileListDataInner) SetExport(v ResponseFileListDataInnerExport)
 	o.Export = &v
 }
 
+// GetImport returns the Import field value if set, zero value otherwise.
+func (o *ResponseFileListDataInner) GetImport() ResponseFileListDataInnerImport {
+	if o == nil || IsNil(o.Import) {
+		var ret ResponseFileListDataInnerImport
+		return ret
+	}
+	return *o.Import
+}
+
+// GetImportOk returns a tuple with the Import field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseFileListDataInner) GetImportOk() (*ResponseFileListDataInnerImport, bool) {
+	if o == nil || IsNil(o.Import) {
+		return nil, false
+	}
+	return o.Import, true
+}
+
+// HasImport returns a boolean if a field has been set.
+func (o *ResponseFileListDataInner) HasImport() bool {
+	if o != nil && !IsNil(o.Import) {
+		return true
+	}
+
+	return false
+}
+
+// SetImport gets a reference to the given ResponseFileListDataInnerImport and assigns it to the Import field.
+func (o *ResponseFileListDataInner) SetImport(v ResponseFileListDataInnerImport) {
+	o.Import = &v
+}
+
 func (o ResponseFileListDataInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -407,6 +494,8 @@ func (o ResponseFileListDataInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["mime_type"] = o.MimeType
 	toSerialize["size_bytes"] = o.SizeBytes
 	toSerialize["sha256"] = o.Sha256
+	toSerialize["own_key"] = o.OwnKey
+	toSerialize["session_id"] = o.SessionId.Get()
 	toSerialize["origin"] = o.Origin
 	toSerialize["input_event_id"] = o.InputEventId.Get()
 	toSerialize["downloadable"] = o.Downloadable
@@ -415,6 +504,9 @@ func (o ResponseFileListDataInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["expires_at"] = o.ExpiresAt.Get()
 	if !IsNil(o.Export) {
 		toSerialize["export"] = o.Export
+	}
+	if !IsNil(o.Import) {
+		toSerialize["import"] = o.Import
 	}
 	return toSerialize, nil
 }
@@ -430,6 +522,8 @@ func (o *ResponseFileListDataInner) UnmarshalJSON(data []byte) (err error) {
 		"mime_type",
 		"size_bytes",
 		"sha256",
+		"own_key",
+		"session_id",
 		"origin",
 		"input_event_id",
 		"downloadable",

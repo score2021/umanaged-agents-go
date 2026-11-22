@@ -69,6 +69,10 @@ type APIClient struct {
 
 	StorageBindingsAPI *StorageBindingsAPIService
 
+	UploadsAPI *UploadsAPIService
+
+	UsageAPI *UsageAPIService
+
 	VaultsAPI *VaultsAPIService
 }
 
@@ -98,6 +102,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SessionsAPI = (*SessionsAPIService)(&c.common)
 	c.SkillsAPI = (*SkillsAPIService)(&c.common)
 	c.StorageBindingsAPI = (*StorageBindingsAPIService)(&c.common)
+	c.UploadsAPI = (*UploadsAPIService)(&c.common)
+	c.UsageAPI = (*UsageAPIService)(&c.common)
 	c.VaultsAPI = (*VaultsAPIService)(&c.common)
 
 	return c

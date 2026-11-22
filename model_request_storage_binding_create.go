@@ -25,7 +25,7 @@ type RequestStorageBindingCreate struct {
 	Endpoint string `json:"endpoint"`
 	Bucket string `json:"bucket"`
 	Prefix *string `json:"prefix,omitempty"`
-	Purpose string `json:"purpose"`
+	Purpose *string `json:"purpose,omitempty"`
 	AccessKey string `json:"access_key"`
 	SecretKey string `json:"secret_key"`
 }
@@ -36,12 +36,11 @@ type _RequestStorageBindingCreate RequestStorageBindingCreate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRequestStorageBindingCreate(name string, endpoint string, bucket string, purpose string, accessKey string, secretKey string) *RequestStorageBindingCreate {
+func NewRequestStorageBindingCreate(name string, endpoint string, bucket string, accessKey string, secretKey string) *RequestStorageBindingCreate {
 	this := RequestStorageBindingCreate{}
 	this.Name = name
 	this.Endpoint = endpoint
 	this.Bucket = bucket
-	this.Purpose = purpose
 	this.AccessKey = accessKey
 	this.SecretKey = secretKey
 	return &this
@@ -159,28 +158,36 @@ func (o *RequestStorageBindingCreate) SetPrefix(v string) {
 	o.Prefix = &v
 }
 
-// GetPurpose returns the Purpose field value
+// GetPurpose returns the Purpose field value if set, zero value otherwise.
 func (o *RequestStorageBindingCreate) GetPurpose() string {
-	if o == nil {
+	if o == nil || IsNil(o.Purpose) {
 		var ret string
 		return ret
 	}
-
-	return o.Purpose
+	return *o.Purpose
 }
 
-// GetPurposeOk returns a tuple with the Purpose field value
+// GetPurposeOk returns a tuple with the Purpose field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RequestStorageBindingCreate) GetPurposeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Purpose) {
 		return nil, false
 	}
-	return &o.Purpose, true
+	return o.Purpose, true
 }
 
-// SetPurpose sets field value
+// HasPurpose returns a boolean if a field has been set.
+func (o *RequestStorageBindingCreate) HasPurpose() bool {
+	if o != nil && !IsNil(o.Purpose) {
+		return true
+	}
+
+	return false
+}
+
+// SetPurpose gets a reference to the given string and assigns it to the Purpose field.
 func (o *RequestStorageBindingCreate) SetPurpose(v string) {
-	o.Purpose = v
+	o.Purpose = &v
 }
 
 // GetAccessKey returns the AccessKey field value
@@ -247,7 +254,9 @@ func (o RequestStorageBindingCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Prefix) {
 		toSerialize["prefix"] = o.Prefix
 	}
-	toSerialize["purpose"] = o.Purpose
+	if !IsNil(o.Purpose) {
+		toSerialize["purpose"] = o.Purpose
+	}
 	toSerialize["access_key"] = o.AccessKey
 	toSerialize["secret_key"] = o.SecretKey
 	return toSerialize, nil
@@ -261,7 +270,6 @@ func (o *RequestStorageBindingCreate) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"endpoint",
 		"bucket",
-		"purpose",
 		"access_key",
 		"secret_key",
 	}

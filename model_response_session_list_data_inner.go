@@ -24,6 +24,7 @@ type ResponseSessionListDataInner struct {
 	Id string `json:"id"`
 	Type string `json:"type"`
 	Status string `json:"status"`
+	StopReason NullableResponseSessionListDataInnerStopReason `json:"stop_reason"`
 	Agent ResponseSessionListDataInnerAgent `json:"agent"`
 	EnvironmentId string `json:"environment_id"`
 	Title NullableString `json:"title"`
@@ -44,11 +45,12 @@ type _ResponseSessionListDataInner ResponseSessionListDataInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResponseSessionListDataInner(id string, type_ string, status string, agent ResponseSessionListDataInnerAgent, environmentId string, title NullableString, resources []ResponseSessionListDataInnerResourcesInner, vaultIds []string, createdBy string, createdAt string, updatedAt string, expiresAt NullableString, archivedAt NullableString, archivedBy NullableString) *ResponseSessionListDataInner {
+func NewResponseSessionListDataInner(id string, type_ string, status string, stopReason NullableResponseSessionListDataInnerStopReason, agent ResponseSessionListDataInnerAgent, environmentId string, title NullableString, resources []ResponseSessionListDataInnerResourcesInner, vaultIds []string, createdBy string, createdAt string, updatedAt string, expiresAt NullableString, archivedAt NullableString, archivedBy NullableString) *ResponseSessionListDataInner {
 	this := ResponseSessionListDataInner{}
 	this.Id = id
 	this.Type = type_
 	this.Status = status
+	this.StopReason = stopReason
 	this.Agent = agent
 	this.EnvironmentId = environmentId
 	this.Title = title
@@ -141,6 +143,32 @@ func (o *ResponseSessionListDataInner) GetStatusOk() (*string, bool) {
 // SetStatus sets field value
 func (o *ResponseSessionListDataInner) SetStatus(v string) {
 	o.Status = v
+}
+
+// GetStopReason returns the StopReason field value
+// If the value is explicit nil, the zero value for ResponseSessionListDataInnerStopReason will be returned
+func (o *ResponseSessionListDataInner) GetStopReason() ResponseSessionListDataInnerStopReason {
+	if o == nil || o.StopReason.Get() == nil {
+		var ret ResponseSessionListDataInnerStopReason
+		return ret
+	}
+
+	return *o.StopReason.Get()
+}
+
+// GetStopReasonOk returns a tuple with the StopReason field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResponseSessionListDataInner) GetStopReasonOk() (*ResponseSessionListDataInnerStopReason, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StopReason.Get(), o.StopReason.IsSet()
+}
+
+// SetStopReason sets field value
+func (o *ResponseSessionListDataInner) SetStopReason(v ResponseSessionListDataInnerStopReason) {
+	o.StopReason.Set(&v)
 }
 
 // GetAgent returns the Agent field value
@@ -460,6 +488,7 @@ func (o ResponseSessionListDataInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
 	toSerialize["status"] = o.Status
+	toSerialize["stop_reason"] = o.StopReason.Get()
 	toSerialize["agent"] = o.Agent
 	toSerialize["environment_id"] = o.EnvironmentId
 	toSerialize["title"] = o.Title.Get()
@@ -485,6 +514,7 @@ func (o *ResponseSessionListDataInner) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"type",
 		"status",
+		"stop_reason",
 		"agent",
 		"environment_id",
 		"title",

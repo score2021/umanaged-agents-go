@@ -593,6 +593,8 @@ type ApiListAgentsRequest struct {
 	ApiService *AgentsAPIService
 	limit *int64
 	page *string
+	q *string
+	order *string
 }
 
 func (r ApiListAgentsRequest) Limit(limit int64) ApiListAgentsRequest {
@@ -602,6 +604,16 @@ func (r ApiListAgentsRequest) Limit(limit int64) ApiListAgentsRequest {
 
 func (r ApiListAgentsRequest) Page(page string) ApiListAgentsRequest {
 	r.page = &page
+	return r
+}
+
+func (r ApiListAgentsRequest) Q(q string) ApiListAgentsRequest {
+	r.q = &q
+	return r
+}
+
+func (r ApiListAgentsRequest) Order(order string) ApiListAgentsRequest {
+	r.order = &order
 	return r
 }
 
@@ -654,6 +666,16 @@ func (a *AgentsAPIService) ListAgentsExecute(r ApiListAgentsRequest) (*ResponseA
 	}
 	if r.page != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	if r.q != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "q", r.q, "form", "")
+	}
+	if r.order != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order", r.order, "form", "")
+	} else {
+		var defaultValue string = "desc"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order", defaultValue, "form", "")
+		r.order = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

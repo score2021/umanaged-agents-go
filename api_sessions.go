@@ -1407,6 +1407,7 @@ type ApiListSessionsRequest struct {
 	page *string
 	agentId *string
 	archived *string
+	environmentId *string
 }
 
 func (r ApiListSessionsRequest) Limit(limit int64) ApiListSessionsRequest {
@@ -1426,6 +1427,11 @@ func (r ApiListSessionsRequest) AgentId(agentId string) ApiListSessionsRequest {
 
 func (r ApiListSessionsRequest) Archived(archived string) ApiListSessionsRequest {
 	r.archived = &archived
+	return r
+}
+
+func (r ApiListSessionsRequest) EnvironmentId(environmentId string) ApiListSessionsRequest {
+	r.environmentId = &environmentId
 	return r
 }
 
@@ -1488,6 +1494,9 @@ func (a *SessionsAPIService) ListSessionsExecute(r ApiListSessionsRequest) (*Res
 		var defaultValue string = "false"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", defaultValue, "form", "")
 		r.archived = &defaultValue
+	}
+	if r.environmentId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environment_id", r.environmentId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

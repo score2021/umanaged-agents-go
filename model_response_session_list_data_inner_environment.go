@@ -23,6 +23,7 @@ var _ MappedNullable = &ResponseSessionListDataInnerEnvironment{}
 type ResponseSessionListDataInnerEnvironment struct {
 	Generation int64 `json:"generation"`
 	State string `json:"state"`
+	Layout string `json:"layout"`
 	LastError NullableString `json:"last_error"`
 	LastErrorDetails NullableResponseSessionListDataInnerEnvironmentLastErrorDetails `json:"last_error_details,omitempty"`
 }
@@ -33,10 +34,11 @@ type _ResponseSessionListDataInnerEnvironment ResponseSessionListDataInnerEnviro
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResponseSessionListDataInnerEnvironment(generation int64, state string, lastError NullableString) *ResponseSessionListDataInnerEnvironment {
+func NewResponseSessionListDataInnerEnvironment(generation int64, state string, layout string, lastError NullableString) *ResponseSessionListDataInnerEnvironment {
 	this := ResponseSessionListDataInnerEnvironment{}
 	this.Generation = generation
 	this.State = state
+	this.Layout = layout
 	this.LastError = lastError
 	return &this
 }
@@ -95,6 +97,30 @@ func (o *ResponseSessionListDataInnerEnvironment) GetStateOk() (*string, bool) {
 // SetState sets field value
 func (o *ResponseSessionListDataInnerEnvironment) SetState(v string) {
 	o.State = v
+}
+
+// GetLayout returns the Layout field value
+func (o *ResponseSessionListDataInnerEnvironment) GetLayout() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Layout
+}
+
+// GetLayoutOk returns a tuple with the Layout field value
+// and a boolean to check if the value has been set.
+func (o *ResponseSessionListDataInnerEnvironment) GetLayoutOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Layout, true
+}
+
+// SetLayout sets field value
+func (o *ResponseSessionListDataInnerEnvironment) SetLayout(v string) {
+	o.Layout = v
 }
 
 // GetLastError returns the LastError field value
@@ -177,6 +203,7 @@ func (o ResponseSessionListDataInnerEnvironment) ToMap() (map[string]interface{}
 	toSerialize := map[string]interface{}{}
 	toSerialize["generation"] = o.Generation
 	toSerialize["state"] = o.State
+	toSerialize["layout"] = o.Layout
 	toSerialize["last_error"] = o.LastError.Get()
 	if o.LastErrorDetails.IsSet() {
 		toSerialize["last_error_details"] = o.LastErrorDetails.Get()
@@ -191,6 +218,7 @@ func (o *ResponseSessionListDataInnerEnvironment) UnmarshalJSON(data []byte) (er
 	requiredProperties := []string{
 		"generation",
 		"state",
+		"layout",
 		"last_error",
 	}
 

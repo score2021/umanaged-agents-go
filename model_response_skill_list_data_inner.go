@@ -27,6 +27,9 @@ type ResponseSkillListDataInner struct {
 	Description NullableString `json:"description"`
 	SourceType string `json:"source_type"`
 	LatestVersion string `json:"latest_version"`
+	ProtectionEnabled bool `json:"protection_enabled"`
+	PublicationCount int64 `json:"publication_count"`
+	UpdatedAt string `json:"updated_at"`
 }
 
 type _ResponseSkillListDataInner ResponseSkillListDataInner
@@ -35,7 +38,7 @@ type _ResponseSkillListDataInner ResponseSkillListDataInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResponseSkillListDataInner(id string, displayTitle string, name NullableString, description NullableString, sourceType string, latestVersion string) *ResponseSkillListDataInner {
+func NewResponseSkillListDataInner(id string, displayTitle string, name NullableString, description NullableString, sourceType string, latestVersion string, protectionEnabled bool, publicationCount int64, updatedAt string) *ResponseSkillListDataInner {
 	this := ResponseSkillListDataInner{}
 	this.Id = id
 	this.DisplayTitle = displayTitle
@@ -43,6 +46,9 @@ func NewResponseSkillListDataInner(id string, displayTitle string, name Nullable
 	this.Description = description
 	this.SourceType = sourceType
 	this.LatestVersion = latestVersion
+	this.ProtectionEnabled = protectionEnabled
+	this.PublicationCount = publicationCount
+	this.UpdatedAt = updatedAt
 	return &this
 }
 
@@ -202,6 +208,78 @@ func (o *ResponseSkillListDataInner) SetLatestVersion(v string) {
 	o.LatestVersion = v
 }
 
+// GetProtectionEnabled returns the ProtectionEnabled field value
+func (o *ResponseSkillListDataInner) GetProtectionEnabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ProtectionEnabled
+}
+
+// GetProtectionEnabledOk returns a tuple with the ProtectionEnabled field value
+// and a boolean to check if the value has been set.
+func (o *ResponseSkillListDataInner) GetProtectionEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ProtectionEnabled, true
+}
+
+// SetProtectionEnabled sets field value
+func (o *ResponseSkillListDataInner) SetProtectionEnabled(v bool) {
+	o.ProtectionEnabled = v
+}
+
+// GetPublicationCount returns the PublicationCount field value
+func (o *ResponseSkillListDataInner) GetPublicationCount() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.PublicationCount
+}
+
+// GetPublicationCountOk returns a tuple with the PublicationCount field value
+// and a boolean to check if the value has been set.
+func (o *ResponseSkillListDataInner) GetPublicationCountOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PublicationCount, true
+}
+
+// SetPublicationCount sets field value
+func (o *ResponseSkillListDataInner) SetPublicationCount(v int64) {
+	o.PublicationCount = v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value
+func (o *ResponseSkillListDataInner) GetUpdatedAt() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// and a boolean to check if the value has been set.
+func (o *ResponseSkillListDataInner) GetUpdatedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdatedAt, true
+}
+
+// SetUpdatedAt sets field value
+func (o *ResponseSkillListDataInner) SetUpdatedAt(v string) {
+	o.UpdatedAt = v
+}
+
 func (o ResponseSkillListDataInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -218,6 +296,9 @@ func (o ResponseSkillListDataInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description.Get()
 	toSerialize["source_type"] = o.SourceType
 	toSerialize["latest_version"] = o.LatestVersion
+	toSerialize["protection_enabled"] = o.ProtectionEnabled
+	toSerialize["publication_count"] = o.PublicationCount
+	toSerialize["updated_at"] = o.UpdatedAt
 	return toSerialize, nil
 }
 
@@ -232,6 +313,9 @@ func (o *ResponseSkillListDataInner) UnmarshalJSON(data []byte) (err error) {
 		"description",
 		"source_type",
 		"latest_version",
+		"protection_enabled",
+		"publication_count",
+		"updated_at",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -27,6 +27,7 @@ type ResponseEnvironment struct {
 	Script *string `json:"script,omitempty"`
 	BaseEnvironmentId NullableString `json:"base_environment_id,omitempty"`
 	CreatedBy NullableString `json:"created_by"`
+	SessionCount int64 `json:"session_count"`
 	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
 	AdditionalProperties map[string]interface{}
@@ -38,13 +39,14 @@ type _ResponseEnvironment ResponseEnvironment
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResponseEnvironment(id string, name string, config ResponseEnvironmentListDataInnerConfig, isBase bool, createdBy NullableString, createdAt string, updatedAt string) *ResponseEnvironment {
+func NewResponseEnvironment(id string, name string, config ResponseEnvironmentListDataInnerConfig, isBase bool, createdBy NullableString, sessionCount int64, createdAt string, updatedAt string) *ResponseEnvironment {
 	this := ResponseEnvironment{}
 	this.Id = id
 	this.Name = name
 	this.Config = config
 	this.IsBase = isBase
 	this.CreatedBy = createdBy
+	this.SessionCount = sessionCount
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	return &this
@@ -254,6 +256,30 @@ func (o *ResponseEnvironment) SetCreatedBy(v string) {
 	o.CreatedBy.Set(&v)
 }
 
+// GetSessionCount returns the SessionCount field value
+func (o *ResponseEnvironment) GetSessionCount() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.SessionCount
+}
+
+// GetSessionCountOk returns a tuple with the SessionCount field value
+// and a boolean to check if the value has been set.
+func (o *ResponseEnvironment) GetSessionCountOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SessionCount, true
+}
+
+// SetSessionCount sets field value
+func (o *ResponseEnvironment) SetSessionCount(v int64) {
+	o.SessionCount = v
+}
+
 // GetCreatedAt returns the CreatedAt field value
 func (o *ResponseEnvironment) GetCreatedAt() string {
 	if o == nil {
@@ -323,6 +349,7 @@ func (o ResponseEnvironment) ToMap() (map[string]interface{}, error) {
 		toSerialize["base_environment_id"] = o.BaseEnvironmentId.Get()
 	}
 	toSerialize["created_by"] = o.CreatedBy.Get()
+	toSerialize["session_count"] = o.SessionCount
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
 
@@ -343,6 +370,7 @@ func (o *ResponseEnvironment) UnmarshalJSON(data []byte) (err error) {
 		"config",
 		"is_base",
 		"created_by",
+		"session_count",
 		"created_at",
 		"updated_at",
 	}
@@ -381,6 +409,7 @@ func (o *ResponseEnvironment) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "script")
 		delete(additionalProperties, "base_environment_id")
 		delete(additionalProperties, "created_by")
+		delete(additionalProperties, "session_count")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "updated_at")
 		o.AdditionalProperties = additionalProperties

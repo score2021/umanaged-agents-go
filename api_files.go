@@ -931,6 +931,7 @@ type ApiListFilesRequest struct {
 	limit *int64
 	scopeId *string
 	afterId *string
+	ownKey *string
 }
 
 func (r ApiListFilesRequest) Limit(limit int64) ApiListFilesRequest {
@@ -945,6 +946,11 @@ func (r ApiListFilesRequest) ScopeId(scopeId string) ApiListFilesRequest {
 
 func (r ApiListFilesRequest) AfterId(afterId string) ApiListFilesRequest {
 	r.afterId = &afterId
+	return r
+}
+
+func (r ApiListFilesRequest) OwnKey(ownKey string) ApiListFilesRequest {
+	r.ownKey = &ownKey
 	return r
 }
 
@@ -1000,6 +1006,13 @@ func (a *FilesAPIService) ListFilesExecute(r ApiListFilesRequest) (*ResponseFile
 	}
 	if r.afterId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "after_id", r.afterId, "form", "")
+	}
+	if r.ownKey != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "own_key", r.ownKey, "form", "")
+	} else {
+		var defaultValue string = "false"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "own_key", defaultValue, "form", "")
+		r.ownKey = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

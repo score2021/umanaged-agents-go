@@ -1,9 +1,9 @@
 # UManaged Agents Go SDK
 
-`v0.5.0` uses OpenAPI Generator CLI 7.27.0 and requires Go 1.23+. The module path is unchanged.
+`v0.6.0` uses OpenAPI Generator CLI 7.27.0 and requires Go 1.23+. The module path is unchanged.
 
 ```bash
-go get github.com/score2021/umanaged-agents-go@v0.5.0
+go get github.com/score2021/umanaged-agents-go@v0.6.0
 ```
 
 Pass the API root URL and your API Key to `NewClient`, or leave them empty to read `MANAGED_AGENTS_API_URL` and `MANAGED_AGENTS_API_KEY` (then the older `MVPP_API_URL` and `MVPP_API_KEY`). There is no built-in address: `NewClient` returns an error when none is set. Use the API root URL without `/v1` or `/console`.
@@ -39,6 +39,11 @@ func main() {
 Use `client.WaitTurn(ctx, sessionID, inputEventID)` to wait for a submitted input, `client.Stream(ctx, sessionID)` to follow live events (open it before sending), and `client.Events(ctx, sessionID, pageSize)` to iterate persisted events. `client.UploadFile(ctx, path)` uploads a file of up to 512 MiB in parts. `EventType`, `EventID` and `EventInputID` read the common fields of any event variant. The Go context controls local waiting.
 
 For an API behind a private CA pass `umanagedagents.WithCAFile(path)` to `NewClient`, or set `MANAGED_AGENTS_CA_FILE`. Verification cannot be turned off. `WithTimeout(d)` changes the per-request limit (default 30 s).
+
+## Changes in v0.6.0
+
+- `ListAgents` accepts `Q` (name or ID contains, case-insensitive) and `Order` (`desc` default, `asc`); `ListSessions` accepts `EnvironmentId`; `ListFiles` accepts `OwnKey` (#658).
+- `Session` has `stop_reason` (why an idle Session stopped), `Environment` has `session_count`, Skill list items have `protection_enabled`, `publication_count` and `updated_at`. v0.5.0 rejects these fields: upgrade before using a deployment that returns them.
 
 ## Changes in v0.5.0
 

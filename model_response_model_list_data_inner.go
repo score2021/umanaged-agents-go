@@ -25,6 +25,14 @@ type ResponseModelListDataInner struct {
 	DisplayName string `json:"display_name"`
 	ContextWindow *int64 `json:"context_window,omitempty"`
 	MaxOutputTokens *int64 `json:"max_output_tokens,omitempty"`
+	Provider NullableString `json:"provider,omitempty"`
+	InputModalities []string `json:"input_modalities,omitempty"`
+	OutputModalities []string `json:"output_modalities,omitempty"`
+	AgentTypes []string `json:"agent_types,omitempty"`
+	ToolCall *string `json:"tool_call,omitempty"`
+	Available *bool `json:"available,omitempty"`
+	UnavailableReason *string `json:"unavailable_reason,omitempty"`
+	Pricing []ResponseModelListDataInnerPricingInner `json:"pricing,omitempty"`
 }
 
 type _ResponseModelListDataInner ResponseModelListDataInner
@@ -160,6 +168,272 @@ func (o *ResponseModelListDataInner) SetMaxOutputTokens(v int64) {
 	o.MaxOutputTokens = &v
 }
 
+// GetProvider returns the Provider field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResponseModelListDataInner) GetProvider() string {
+	if o == nil || IsNil(o.Provider.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Provider.Get()
+}
+
+// GetProviderOk returns a tuple with the Provider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResponseModelListDataInner) GetProviderOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Provider.Get(), o.Provider.IsSet()
+}
+
+// HasProvider returns a boolean if a field has been set.
+func (o *ResponseModelListDataInner) HasProvider() bool {
+	if o != nil && o.Provider.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProvider gets a reference to the given NullableString and assigns it to the Provider field.
+func (o *ResponseModelListDataInner) SetProvider(v string) {
+	o.Provider.Set(&v)
+}
+// SetProviderNil sets the value for Provider to be an explicit nil
+func (o *ResponseModelListDataInner) SetProviderNil() {
+	o.Provider.Set(nil)
+}
+
+// UnsetProvider ensures that no value is present for Provider, not even an explicit nil
+func (o *ResponseModelListDataInner) UnsetProvider() {
+	o.Provider.Unset()
+}
+
+// GetInputModalities returns the InputModalities field value if set, zero value otherwise.
+func (o *ResponseModelListDataInner) GetInputModalities() []string {
+	if o == nil || IsNil(o.InputModalities) {
+		var ret []string
+		return ret
+	}
+	return o.InputModalities
+}
+
+// GetInputModalitiesOk returns a tuple with the InputModalities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseModelListDataInner) GetInputModalitiesOk() ([]string, bool) {
+	if o == nil || IsNil(o.InputModalities) {
+		return nil, false
+	}
+	return o.InputModalities, true
+}
+
+// HasInputModalities returns a boolean if a field has been set.
+func (o *ResponseModelListDataInner) HasInputModalities() bool {
+	if o != nil && !IsNil(o.InputModalities) {
+		return true
+	}
+
+	return false
+}
+
+// SetInputModalities gets a reference to the given []string and assigns it to the InputModalities field.
+func (o *ResponseModelListDataInner) SetInputModalities(v []string) {
+	o.InputModalities = v
+}
+
+// GetOutputModalities returns the OutputModalities field value if set, zero value otherwise.
+func (o *ResponseModelListDataInner) GetOutputModalities() []string {
+	if o == nil || IsNil(o.OutputModalities) {
+		var ret []string
+		return ret
+	}
+	return o.OutputModalities
+}
+
+// GetOutputModalitiesOk returns a tuple with the OutputModalities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseModelListDataInner) GetOutputModalitiesOk() ([]string, bool) {
+	if o == nil || IsNil(o.OutputModalities) {
+		return nil, false
+	}
+	return o.OutputModalities, true
+}
+
+// HasOutputModalities returns a boolean if a field has been set.
+func (o *ResponseModelListDataInner) HasOutputModalities() bool {
+	if o != nil && !IsNil(o.OutputModalities) {
+		return true
+	}
+
+	return false
+}
+
+// SetOutputModalities gets a reference to the given []string and assigns it to the OutputModalities field.
+func (o *ResponseModelListDataInner) SetOutputModalities(v []string) {
+	o.OutputModalities = v
+}
+
+// GetAgentTypes returns the AgentTypes field value if set, zero value otherwise.
+func (o *ResponseModelListDataInner) GetAgentTypes() []string {
+	if o == nil || IsNil(o.AgentTypes) {
+		var ret []string
+		return ret
+	}
+	return o.AgentTypes
+}
+
+// GetAgentTypesOk returns a tuple with the AgentTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseModelListDataInner) GetAgentTypesOk() ([]string, bool) {
+	if o == nil || IsNil(o.AgentTypes) {
+		return nil, false
+	}
+	return o.AgentTypes, true
+}
+
+// HasAgentTypes returns a boolean if a field has been set.
+func (o *ResponseModelListDataInner) HasAgentTypes() bool {
+	if o != nil && !IsNil(o.AgentTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentTypes gets a reference to the given []string and assigns it to the AgentTypes field.
+func (o *ResponseModelListDataInner) SetAgentTypes(v []string) {
+	o.AgentTypes = v
+}
+
+// GetToolCall returns the ToolCall field value if set, zero value otherwise.
+func (o *ResponseModelListDataInner) GetToolCall() string {
+	if o == nil || IsNil(o.ToolCall) {
+		var ret string
+		return ret
+	}
+	return *o.ToolCall
+}
+
+// GetToolCallOk returns a tuple with the ToolCall field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseModelListDataInner) GetToolCallOk() (*string, bool) {
+	if o == nil || IsNil(o.ToolCall) {
+		return nil, false
+	}
+	return o.ToolCall, true
+}
+
+// HasToolCall returns a boolean if a field has been set.
+func (o *ResponseModelListDataInner) HasToolCall() bool {
+	if o != nil && !IsNil(o.ToolCall) {
+		return true
+	}
+
+	return false
+}
+
+// SetToolCall gets a reference to the given string and assigns it to the ToolCall field.
+func (o *ResponseModelListDataInner) SetToolCall(v string) {
+	o.ToolCall = &v
+}
+
+// GetAvailable returns the Available field value if set, zero value otherwise.
+func (o *ResponseModelListDataInner) GetAvailable() bool {
+	if o == nil || IsNil(o.Available) {
+		var ret bool
+		return ret
+	}
+	return *o.Available
+}
+
+// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseModelListDataInner) GetAvailableOk() (*bool, bool) {
+	if o == nil || IsNil(o.Available) {
+		return nil, false
+	}
+	return o.Available, true
+}
+
+// HasAvailable returns a boolean if a field has been set.
+func (o *ResponseModelListDataInner) HasAvailable() bool {
+	if o != nil && !IsNil(o.Available) {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailable gets a reference to the given bool and assigns it to the Available field.
+func (o *ResponseModelListDataInner) SetAvailable(v bool) {
+	o.Available = &v
+}
+
+// GetUnavailableReason returns the UnavailableReason field value if set, zero value otherwise.
+func (o *ResponseModelListDataInner) GetUnavailableReason() string {
+	if o == nil || IsNil(o.UnavailableReason) {
+		var ret string
+		return ret
+	}
+	return *o.UnavailableReason
+}
+
+// GetUnavailableReasonOk returns a tuple with the UnavailableReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseModelListDataInner) GetUnavailableReasonOk() (*string, bool) {
+	if o == nil || IsNil(o.UnavailableReason) {
+		return nil, false
+	}
+	return o.UnavailableReason, true
+}
+
+// HasUnavailableReason returns a boolean if a field has been set.
+func (o *ResponseModelListDataInner) HasUnavailableReason() bool {
+	if o != nil && !IsNil(o.UnavailableReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnavailableReason gets a reference to the given string and assigns it to the UnavailableReason field.
+func (o *ResponseModelListDataInner) SetUnavailableReason(v string) {
+	o.UnavailableReason = &v
+}
+
+// GetPricing returns the Pricing field value if set, zero value otherwise.
+func (o *ResponseModelListDataInner) GetPricing() []ResponseModelListDataInnerPricingInner {
+	if o == nil || IsNil(o.Pricing) {
+		var ret []ResponseModelListDataInnerPricingInner
+		return ret
+	}
+	return o.Pricing
+}
+
+// GetPricingOk returns a tuple with the Pricing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResponseModelListDataInner) GetPricingOk() ([]ResponseModelListDataInnerPricingInner, bool) {
+	if o == nil || IsNil(o.Pricing) {
+		return nil, false
+	}
+	return o.Pricing, true
+}
+
+// HasPricing returns a boolean if a field has been set.
+func (o *ResponseModelListDataInner) HasPricing() bool {
+	if o != nil && !IsNil(o.Pricing) {
+		return true
+	}
+
+	return false
+}
+
+// SetPricing gets a reference to the given []ResponseModelListDataInnerPricingInner and assigns it to the Pricing field.
+func (o *ResponseModelListDataInner) SetPricing(v []ResponseModelListDataInnerPricingInner) {
+	o.Pricing = v
+}
+
 func (o ResponseModelListDataInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -177,6 +451,30 @@ func (o ResponseModelListDataInner) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MaxOutputTokens) {
 		toSerialize["max_output_tokens"] = o.MaxOutputTokens
+	}
+	if o.Provider.IsSet() {
+		toSerialize["provider"] = o.Provider.Get()
+	}
+	if !IsNil(o.InputModalities) {
+		toSerialize["input_modalities"] = o.InputModalities
+	}
+	if !IsNil(o.OutputModalities) {
+		toSerialize["output_modalities"] = o.OutputModalities
+	}
+	if !IsNil(o.AgentTypes) {
+		toSerialize["agent_types"] = o.AgentTypes
+	}
+	if !IsNil(o.ToolCall) {
+		toSerialize["tool_call"] = o.ToolCall
+	}
+	if !IsNil(o.Available) {
+		toSerialize["available"] = o.Available
+	}
+	if !IsNil(o.UnavailableReason) {
+		toSerialize["unavailable_reason"] = o.UnavailableReason
+	}
+	if !IsNil(o.Pricing) {
+		toSerialize["pricing"] = o.Pricing
 	}
 	return toSerialize, nil
 }

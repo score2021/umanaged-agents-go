@@ -25,6 +25,12 @@ type ModelsAPIService service
 type ApiListModelsRequest struct {
 	ctx context.Context
 	ApiService *ModelsAPIService
+	includeUnavailable *string
+}
+
+func (r ApiListModelsRequest) IncludeUnavailable(includeUnavailable string) ApiListModelsRequest {
+	r.includeUnavailable = &includeUnavailable
+	return r
 }
 
 func (r ApiListModelsRequest) Execute() (*ResponseModelList, *http.Response, error) {
@@ -67,6 +73,13 @@ func (a *ModelsAPIService) ListModelsExecute(r ApiListModelsRequest) (*ResponseM
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.includeUnavailable != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_unavailable", r.includeUnavailable, "form", "")
+	} else {
+		var defaultValue string = "false"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_unavailable", defaultValue, "form", "")
+		r.includeUnavailable = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -119,6 +132,17 @@ func (a *ModelsAPIService) ListModelsExecute(r ApiListModelsRequest) (*ResponseM
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Error

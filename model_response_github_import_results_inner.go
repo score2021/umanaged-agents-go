@@ -352,7 +352,6 @@ func (o *ResponseGithubImportResultsInner) UnmarshalJSON(data []byte) (err error
 	varResponseGithubImportResultsInner := _ResponseGithubImportResultsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseGithubImportResultsInner)
 
 	if err != nil {

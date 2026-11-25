@@ -171,7 +171,6 @@ func (o *RequestStorageBindingCredentials) UnmarshalJSON(data []byte) (err error
 	varRequestStorageBindingCredentials := _RequestStorageBindingCredentials{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestStorageBindingCredentials)
 
 	if err != nil {

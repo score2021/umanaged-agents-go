@@ -315,7 +315,6 @@ func (o *EventAgentToolUse) UnmarshalJSON(data []byte) (err error) {
 	varEventAgentToolUse := _EventAgentToolUse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventAgentToolUse)
 
 	if err != nil {

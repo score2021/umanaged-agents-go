@@ -171,7 +171,6 @@ func (o *RequestSessionCreateResourcesInnerAnyOf) UnmarshalJSON(data []byte) (er
 	varRequestSessionCreateResourcesInnerAnyOf := _RequestSessionCreateResourcesInnerAnyOf{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestSessionCreateResourcesInnerAnyOf)
 
 	if err != nil {

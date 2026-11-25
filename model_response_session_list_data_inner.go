@@ -545,7 +545,6 @@ func (o *ResponseSessionListDataInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseSessionListDataInner := _ResponseSessionListDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSessionListDataInner)
 
 	if err != nil {

@@ -135,7 +135,6 @@ func (o *ResponseStorageBindingDeleted) UnmarshalJSON(data []byte) (err error) {
 	varResponseStorageBindingDeleted := _ResponseStorageBindingDeleted{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseStorageBindingDeleted)
 
 	if err != nil {

@@ -331,7 +331,6 @@ func (o *ResponseSkillWrite) UnmarshalJSON(data []byte) (err error) {
 	varResponseSkillWrite := _ResponseSkillWrite{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSkillWrite)
 
 	if err != nil {

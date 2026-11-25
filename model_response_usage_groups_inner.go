@@ -219,7 +219,6 @@ func (o *ResponseUsageGroupsInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseUsageGroupsInner := _ResponseUsageGroupsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseUsageGroupsInner)
 
 	if err != nil {

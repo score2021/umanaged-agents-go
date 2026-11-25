@@ -235,7 +235,6 @@ func (o *ResponseTurnError) UnmarshalJSON(data []byte) (err error) {
 	varResponseTurnError := _ResponseTurnError{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseTurnError)
 
 	if err != nil {

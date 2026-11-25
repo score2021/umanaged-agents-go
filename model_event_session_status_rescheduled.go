@@ -195,7 +195,6 @@ func (o *EventSessionStatusRescheduled) UnmarshalJSON(data []byte) (err error) {
 	varEventSessionStatusRescheduled := _EventSessionStatusRescheduled{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventSessionStatusRescheduled)
 
 	if err != nil {

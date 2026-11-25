@@ -135,7 +135,6 @@ func (o *ResponseEnvironmentDeleted) UnmarshalJSON(data []byte) (err error) {
 	varResponseEnvironmentDeleted := _ResponseEnvironmentDeleted{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseEnvironmentDeleted)
 
 	if err != nil {

@@ -171,7 +171,6 @@ func (o *RequestResourceInput) UnmarshalJSON(data []byte) (err error) {
 	varRequestResourceInput := _RequestResourceInput{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestResourceInput)
 
 	if err != nil {

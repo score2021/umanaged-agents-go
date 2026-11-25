@@ -281,7 +281,6 @@ func (o *EventSessionEnvironment) UnmarshalJSON(data []byte) (err error) {
 	varEventSessionEnvironment := _EventSessionEnvironment{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventSessionEnvironment)
 
 	if err != nil {

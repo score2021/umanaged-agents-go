@@ -199,7 +199,6 @@ func (o *InputUserToolConfirmation) UnmarshalJSON(data []byte) (err error) {
 	varInputUserToolConfirmation := _InputUserToolConfirmation{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varInputUserToolConfirmation)
 
 	if err != nil {

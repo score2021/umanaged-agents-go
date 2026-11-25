@@ -417,7 +417,6 @@ func (o *ResponseCredentialListDataInner) UnmarshalJSON(data []byte) (err error)
 	varResponseCredentialListDataInner := _ResponseCredentialListDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseCredentialListDataInner)
 
 	if err != nil {

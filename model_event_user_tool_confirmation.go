@@ -287,7 +287,6 @@ func (o *EventUserToolConfirmation) UnmarshalJSON(data []byte) (err error) {
 	varEventUserToolConfirmation := _EventUserToolConfirmation{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventUserToolConfirmation)
 
 	if err != nil {

@@ -503,7 +503,6 @@ func (o *ResponseAgentListDataInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseAgentListDataInner := _ResponseAgentListDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseAgentListDataInner)
 
 	if err != nil {

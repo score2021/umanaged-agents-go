@@ -165,7 +165,6 @@ func (o *ResponseStorageBindingReferencesSessionsInner) UnmarshalJSON(data []byt
 	varResponseStorageBindingReferencesSessionsInner := _ResponseStorageBindingReferencesSessionsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseStorageBindingReferencesSessionsInner)
 
 	if err != nil {

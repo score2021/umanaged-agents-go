@@ -249,7 +249,6 @@ func (o *ResponseGithubScanRepo) UnmarshalJSON(data []byte) (err error) {
 	varResponseGithubScanRepo := _ResponseGithubScanRepo{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseGithubScanRepo)
 
 	if err != nil {

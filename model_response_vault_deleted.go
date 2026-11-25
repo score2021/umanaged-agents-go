@@ -163,7 +163,6 @@ func (o *ResponseVaultDeleted) UnmarshalJSON(data []byte) (err error) {
 	varResponseVaultDeleted := _ResponseVaultDeleted{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseVaultDeleted)
 
 	if err != nil {

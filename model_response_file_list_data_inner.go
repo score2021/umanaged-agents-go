@@ -549,7 +549,6 @@ func (o *ResponseFileListDataInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseFileListDataInner := _ResponseFileListDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseFileListDataInner)
 
 	if err != nil {

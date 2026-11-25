@@ -143,7 +143,6 @@ func (o *RequestEnvironmentCreateArtifactExport) UnmarshalJSON(data []byte) (err
 	varRequestEnvironmentCreateArtifactExport := _RequestEnvironmentCreateArtifactExport{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestEnvironmentCreateArtifactExport)
 
 	if err != nil {

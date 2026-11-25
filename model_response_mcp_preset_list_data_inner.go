@@ -415,7 +415,6 @@ func (o *ResponseMcpPresetListDataInner) UnmarshalJSON(data []byte) (err error) 
 	varResponseMcpPresetListDataInner := _ResponseMcpPresetListDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseMcpPresetListDataInner)
 
 	if err != nil {

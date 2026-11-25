@@ -199,7 +199,6 @@ func (o *InputUserCustomToolResult) UnmarshalJSON(data []byte) (err error) {
 	varInputUserCustomToolResult := _InputUserCustomToolResult{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varInputUserCustomToolResult)
 
 	if err != nil {

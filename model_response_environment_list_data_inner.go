@@ -497,7 +497,6 @@ func (o *ResponseEnvironmentListDataInner) UnmarshalJSON(data []byte) (err error
 	varResponseEnvironmentListDataInner := _ResponseEnvironmentListDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseEnvironmentListDataInner)
 
 	if err != nil {

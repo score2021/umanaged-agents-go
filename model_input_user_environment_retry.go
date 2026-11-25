@@ -107,7 +107,6 @@ func (o *InputUserEnvironmentRetry) UnmarshalJSON(data []byte) (err error) {
 	varInputUserEnvironmentRetry := _InputUserEnvironmentRetry{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varInputUserEnvironmentRetry)
 
 	if err != nil {

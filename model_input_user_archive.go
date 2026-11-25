@@ -107,7 +107,6 @@ func (o *InputUserArchive) UnmarshalJSON(data []byte) (err error) {
 	varInputUserArchive := _InputUserArchive{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varInputUserArchive)
 
 	if err != nil {

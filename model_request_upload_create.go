@@ -207,7 +207,6 @@ func (o *RequestUploadCreate) UnmarshalJSON(data []byte) (err error) {
 	varRequestUploadCreate := _RequestUploadCreate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestUploadCreate)
 
 	if err != nil {

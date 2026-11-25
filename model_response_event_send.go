@@ -107,7 +107,6 @@ func (o *ResponseEventSend) UnmarshalJSON(data []byte) (err error) {
 	varResponseEventSend := _ResponseEventSend{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseEventSend)
 
 	if err != nil {

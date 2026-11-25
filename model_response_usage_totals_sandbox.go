@@ -163,7 +163,6 @@ func (o *ResponseUsageTotalsSandbox) UnmarshalJSON(data []byte) (err error) {
 	varResponseUsageTotalsSandbox := _ResponseUsageTotalsSandbox{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseUsageTotalsSandbox)
 
 	if err != nil {

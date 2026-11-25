@@ -389,7 +389,6 @@ func (o *ResponseTraceLinksDataInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseTraceLinksDataInner := _ResponseTraceLinksDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseTraceLinksDataInner)
 
 	if err != nil {

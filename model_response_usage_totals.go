@@ -163,7 +163,6 @@ func (o *ResponseUsageTotals) UnmarshalJSON(data []byte) (err error) {
 	varResponseUsageTotals := _ResponseUsageTotals{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseUsageTotals)
 
 	if err != nil {

@@ -107,7 +107,6 @@ func (o *RequestAgentCreateToolsInnerOneOfConfigsInnerPermissionPolicy) Unmarsha
 	varRequestAgentCreateToolsInnerOneOfConfigsInnerPermissionPolicy := _RequestAgentCreateToolsInnerOneOfConfigsInnerPermissionPolicy{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestAgentCreateToolsInnerOneOfConfigsInnerPermissionPolicy)
 
 	if err != nil {

@@ -1,9 +1,9 @@
 # UManaged Agents Go SDK
 
-`v0.7.0` uses OpenAPI Generator CLI 7.27.0 and requires Go 1.23+. The module path is unchanged.
+`v0.6.1` uses OpenAPI Generator CLI 7.27.0 and requires Go 1.23+. The module path is unchanged.
 
 ```bash
-go get github.com/score2021/umanaged-agents-go@v0.7.0
+go get github.com/score2021/umanaged-agents-go@v0.6.1
 ```
 
 Pass the API root URL and your API Key to `NewClient`, or leave them empty to read `MANAGED_AGENTS_API_URL` and `MANAGED_AGENTS_API_KEY` (then the older `MVPP_API_URL` and `MVPP_API_KEY`). There is no built-in address: `NewClient` returns an error when none is set. Use the API root URL without `/v1` or `/console`.
@@ -40,10 +40,9 @@ Use `client.WaitTurn(ctx, sessionID, inputEventID)` to wait for a submitted inpu
 
 For an API behind a private CA pass `umanagedagents.WithCAFile(path)` to `NewClient`, or set `MANAGED_AGENTS_CA_FILE`. Verification cannot be turned off. `WithTimeout(d)` changes the per-request limit (default 30 s).
 
-## Changes in v0.7.0
+## Changes in v0.6.1
 
-- New operations `ArchiveEnvironment` and `DeleteEnvironment`; `ListEnvironments` accepts `Archived` (`false` default, `true`, `all`) (#716).
-- `Environment` has `available`, `unavailable_reason` (`archived` or `template_retired`) and `archived_at`; creating a Session on an unavailable environment returns 409 `ENVIRONMENT_UNAVAILABLE` (#715). v0.6.0 rejects these fields: upgrade before using a deployment that returns them.
+- Response models ignore fields they do not know, so a deployment that adds a field to a response no longer breaks this version (v0.6.0 and earlier fail with `json: unknown field`). Required fields are still required. The variants of the one oneOf without a discriminator (the `tools` items of an Agent request) stay strict, because the client tells them apart that way.
 
 ## Changes in v0.6.0
 

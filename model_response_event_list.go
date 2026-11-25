@@ -137,7 +137,6 @@ func (o *ResponseEventList) UnmarshalJSON(data []byte) (err error) {
 	varResponseEventList := _ResponseEventList{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseEventList)
 
 	if err != nil {

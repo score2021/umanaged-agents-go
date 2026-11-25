@@ -221,7 +221,6 @@ func (o *ResponseSessionListDataInnerEnvironmentLastErrorDetailsInitialization) 
 	varResponseSessionListDataInnerEnvironmentLastErrorDetailsInitialization := _ResponseSessionListDataInnerEnvironmentLastErrorDetailsInitialization{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSessionListDataInnerEnvironmentLastErrorDetailsInitialization)
 
 	if err != nil {

@@ -26,9 +26,6 @@ type ResponseEnvironment struct {
 	IsBase bool `json:"is_base"`
 	Script *string `json:"script,omitempty"`
 	BaseEnvironmentId NullableString `json:"base_environment_id,omitempty"`
-	ArchivedAt NullableString `json:"archived_at,omitempty"`
-	Available bool `json:"available"`
-	UnavailableReason *string `json:"unavailable_reason,omitempty"`
 	CreatedBy NullableString `json:"created_by"`
 	SessionCount int64 `json:"session_count"`
 	CreatedAt string `json:"created_at"`
@@ -42,13 +39,12 @@ type _ResponseEnvironment ResponseEnvironment
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResponseEnvironment(id string, name string, config ResponseEnvironmentListDataInnerConfig, isBase bool, available bool, createdBy NullableString, sessionCount int64, createdAt string, updatedAt string) *ResponseEnvironment {
+func NewResponseEnvironment(id string, name string, config ResponseEnvironmentListDataInnerConfig, isBase bool, createdBy NullableString, sessionCount int64, createdAt string, updatedAt string) *ResponseEnvironment {
 	this := ResponseEnvironment{}
 	this.Id = id
 	this.Name = name
 	this.Config = config
 	this.IsBase = isBase
-	this.Available = available
 	this.CreatedBy = createdBy
 	this.SessionCount = sessionCount
 	this.CreatedAt = createdAt
@@ -234,104 +230,6 @@ func (o *ResponseEnvironment) UnsetBaseEnvironmentId() {
 	o.BaseEnvironmentId.Unset()
 }
 
-// GetArchivedAt returns the ArchivedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ResponseEnvironment) GetArchivedAt() string {
-	if o == nil || IsNil(o.ArchivedAt.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.ArchivedAt.Get()
-}
-
-// GetArchivedAtOk returns a tuple with the ArchivedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ResponseEnvironment) GetArchivedAtOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ArchivedAt.Get(), o.ArchivedAt.IsSet()
-}
-
-// HasArchivedAt returns a boolean if a field has been set.
-func (o *ResponseEnvironment) HasArchivedAt() bool {
-	if o != nil && o.ArchivedAt.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetArchivedAt gets a reference to the given NullableString and assigns it to the ArchivedAt field.
-func (o *ResponseEnvironment) SetArchivedAt(v string) {
-	o.ArchivedAt.Set(&v)
-}
-// SetArchivedAtNil sets the value for ArchivedAt to be an explicit nil
-func (o *ResponseEnvironment) SetArchivedAtNil() {
-	o.ArchivedAt.Set(nil)
-}
-
-// UnsetArchivedAt ensures that no value is present for ArchivedAt, not even an explicit nil
-func (o *ResponseEnvironment) UnsetArchivedAt() {
-	o.ArchivedAt.Unset()
-}
-
-// GetAvailable returns the Available field value
-func (o *ResponseEnvironment) GetAvailable() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Available
-}
-
-// GetAvailableOk returns a tuple with the Available field value
-// and a boolean to check if the value has been set.
-func (o *ResponseEnvironment) GetAvailableOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Available, true
-}
-
-// SetAvailable sets field value
-func (o *ResponseEnvironment) SetAvailable(v bool) {
-	o.Available = v
-}
-
-// GetUnavailableReason returns the UnavailableReason field value if set, zero value otherwise.
-func (o *ResponseEnvironment) GetUnavailableReason() string {
-	if o == nil || IsNil(o.UnavailableReason) {
-		var ret string
-		return ret
-	}
-	return *o.UnavailableReason
-}
-
-// GetUnavailableReasonOk returns a tuple with the UnavailableReason field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResponseEnvironment) GetUnavailableReasonOk() (*string, bool) {
-	if o == nil || IsNil(o.UnavailableReason) {
-		return nil, false
-	}
-	return o.UnavailableReason, true
-}
-
-// HasUnavailableReason returns a boolean if a field has been set.
-func (o *ResponseEnvironment) HasUnavailableReason() bool {
-	if o != nil && !IsNil(o.UnavailableReason) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnavailableReason gets a reference to the given string and assigns it to the UnavailableReason field.
-func (o *ResponseEnvironment) SetUnavailableReason(v string) {
-	o.UnavailableReason = &v
-}
-
 // GetCreatedBy returns the CreatedBy field value
 // If the value is explicit nil, the zero value for string will be returned
 func (o *ResponseEnvironment) GetCreatedBy() string {
@@ -450,13 +348,6 @@ func (o ResponseEnvironment) ToMap() (map[string]interface{}, error) {
 	if o.BaseEnvironmentId.IsSet() {
 		toSerialize["base_environment_id"] = o.BaseEnvironmentId.Get()
 	}
-	if o.ArchivedAt.IsSet() {
-		toSerialize["archived_at"] = o.ArchivedAt.Get()
-	}
-	toSerialize["available"] = o.Available
-	if !IsNil(o.UnavailableReason) {
-		toSerialize["unavailable_reason"] = o.UnavailableReason
-	}
 	toSerialize["created_by"] = o.CreatedBy.Get()
 	toSerialize["session_count"] = o.SessionCount
 	toSerialize["created_at"] = o.CreatedAt
@@ -478,7 +369,6 @@ func (o *ResponseEnvironment) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"config",
 		"is_base",
-		"available",
 		"created_by",
 		"session_count",
 		"created_at",
@@ -518,9 +408,6 @@ func (o *ResponseEnvironment) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_base")
 		delete(additionalProperties, "script")
 		delete(additionalProperties, "base_environment_id")
-		delete(additionalProperties, "archived_at")
-		delete(additionalProperties, "available")
-		delete(additionalProperties, "unavailable_reason")
 		delete(additionalProperties, "created_by")
 		delete(additionalProperties, "session_count")
 		delete(additionalProperties, "created_at")

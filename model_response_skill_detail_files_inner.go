@@ -171,7 +171,6 @@ func (o *ResponseSkillDetailFilesInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseSkillDetailFilesInner := _ResponseSkillDetailFilesInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSkillDetailFilesInner)
 
 	if err != nil {

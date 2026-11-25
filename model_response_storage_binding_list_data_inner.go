@@ -399,7 +399,6 @@ func (o *ResponseStorageBindingListDataInner) UnmarshalJSON(data []byte) (err er
 	varResponseStorageBindingListDataInner := _ResponseStorageBindingListDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseStorageBindingListDataInner)
 
 	if err != nil {

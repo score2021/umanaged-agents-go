@@ -291,7 +291,6 @@ func (o *RequestStorageBindingCreate) UnmarshalJSON(data []byte) (err error) {
 	varRequestStorageBindingCreate := _RequestStorageBindingCreate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestStorageBindingCreate)
 
 	if err != nil {

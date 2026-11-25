@@ -303,7 +303,6 @@ func (o *ResponseUsageTotalsModel) UnmarshalJSON(data []byte) (err error) {
 	varResponseUsageTotalsModel := _ResponseUsageTotalsModel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseUsageTotalsModel)
 
 	if err != nil {

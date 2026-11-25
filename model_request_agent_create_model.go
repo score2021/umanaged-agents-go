@@ -107,7 +107,6 @@ func (o *RequestAgentCreateModel) UnmarshalJSON(data []byte) (err error) {
 	varRequestAgentCreateModel := _RequestAgentCreateModel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestAgentCreateModel)
 
 	if err != nil {

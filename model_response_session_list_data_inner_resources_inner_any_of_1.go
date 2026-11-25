@@ -247,6 +247,7 @@ func (o *ResponseSessionListDataInnerResourcesInnerAnyOf1) UnmarshalJSON(data []
 	varResponseSessionListDataInnerResourcesInnerAnyOf1 := _ResponseSessionListDataInnerResourcesInnerAnyOf1{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSessionListDataInnerResourcesInnerAnyOf1)
 
 	if err != nil {

@@ -191,6 +191,7 @@ func (o *ResponseTurnPendingActionsInner) UnmarshalJSON(data []byte) (err error)
 	varResponseTurnPendingActionsInner := _ResponseTurnPendingActionsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseTurnPendingActionsInner)
 
 	if err != nil {

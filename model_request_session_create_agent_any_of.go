@@ -171,6 +171,7 @@ func (o *RequestSessionCreateAgentAnyOf) UnmarshalJSON(data []byte) (err error) 
 	varRequestSessionCreateAgentAnyOf := _RequestSessionCreateAgentAnyOf{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestSessionCreateAgentAnyOf)
 
 	if err != nil {

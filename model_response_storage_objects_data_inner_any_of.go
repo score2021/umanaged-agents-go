@@ -135,6 +135,7 @@ func (o *ResponseStorageObjectsDataInnerAnyOf) UnmarshalJSON(data []byte) (err e
 	varResponseStorageObjectsDataInnerAnyOf := _ResponseStorageObjectsDataInnerAnyOf{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseStorageObjectsDataInnerAnyOf)
 
 	if err != nil {

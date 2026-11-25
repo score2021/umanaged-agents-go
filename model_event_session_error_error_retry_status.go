@@ -107,6 +107,7 @@ func (o *EventSessionErrorErrorRetryStatus) UnmarshalJSON(data []byte) (err erro
 	varEventSessionErrorErrorRetryStatus := _EventSessionErrorErrorRetryStatus{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventSessionErrorErrorRetryStatus)
 
 	if err != nil {

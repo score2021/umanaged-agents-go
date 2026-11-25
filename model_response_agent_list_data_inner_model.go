@@ -107,6 +107,7 @@ func (o *ResponseAgentListDataInnerModel) UnmarshalJSON(data []byte) (err error)
 	varResponseAgentListDataInnerModel := _ResponseAgentListDataInnerModel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseAgentListDataInnerModel)
 
 	if err != nil {

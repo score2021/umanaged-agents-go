@@ -179,6 +179,7 @@ func (o *RequestAgentCreateContextManagementInner) UnmarshalJSON(data []byte) (e
 	varRequestAgentCreateContextManagementInner := _RequestAgentCreateContextManagementInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestAgentCreateContextManagementInner)
 
 	if err != nil {

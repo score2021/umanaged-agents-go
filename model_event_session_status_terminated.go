@@ -195,6 +195,7 @@ func (o *EventSessionStatusTerminated) UnmarshalJSON(data []byte) (err error) {
 	varEventSessionStatusTerminated := _EventSessionStatusTerminated{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventSessionStatusTerminated)
 
 	if err != nil {

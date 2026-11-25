@@ -275,6 +275,7 @@ func (o *ResponseVault) UnmarshalJSON(data []byte) (err error) {
 	varResponseVault := _ResponseVault{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseVault)
 
 	if err != nil {

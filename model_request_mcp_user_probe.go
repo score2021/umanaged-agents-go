@@ -143,6 +143,7 @@ func (o *RequestMcpUserProbe) UnmarshalJSON(data []byte) (err error) {
 	varRequestMcpUserProbe := _RequestMcpUserProbe{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestMcpUserProbe)
 
 	if err != nil {

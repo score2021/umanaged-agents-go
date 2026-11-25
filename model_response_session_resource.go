@@ -247,6 +247,7 @@ func (o *ResponseSessionResource) UnmarshalJSON(data []byte) (err error) {
 	varResponseSessionResource := _ResponseSessionResource{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSessionResource)
 
 	if err != nil {

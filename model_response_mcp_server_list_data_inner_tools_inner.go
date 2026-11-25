@@ -135,6 +135,7 @@ func (o *ResponseMcpServerListDataInnerToolsInner) UnmarshalJSON(data []byte) (e
 	varResponseMcpServerListDataInnerToolsInner := _ResponseMcpServerListDataInnerToolsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseMcpServerListDataInnerToolsInner)
 
 	if err != nil {

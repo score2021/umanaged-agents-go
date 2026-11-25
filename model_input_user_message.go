@@ -135,6 +135,7 @@ func (o *InputUserMessage) UnmarshalJSON(data []byte) (err error) {
 	varInputUserMessage := _InputUserMessage{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varInputUserMessage)
 
 	if err != nil {

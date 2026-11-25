@@ -195,6 +195,7 @@ func (o *EventUserEnvironmentRetry) UnmarshalJSON(data []byte) (err error) {
 	varEventUserEnvironmentRetry := _EventUserEnvironmentRetry{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventUserEnvironmentRetry)
 
 	if err != nil {

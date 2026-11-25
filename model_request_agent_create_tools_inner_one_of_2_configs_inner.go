@@ -215,6 +215,7 @@ func (o *RequestAgentCreateToolsInnerOneOf2ConfigsInner) UnmarshalJSON(data []by
 	varRequestAgentCreateToolsInnerOneOf2ConfigsInner := _RequestAgentCreateToolsInnerOneOf2ConfigsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestAgentCreateToolsInnerOneOf2ConfigsInner)
 
 	if err != nil {

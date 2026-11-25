@@ -199,6 +199,7 @@ func (o *ErrorErrorLimit) UnmarshalJSON(data []byte) (err error) {
 	varErrorErrorLimit := _ErrorErrorLimit{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varErrorErrorLimit)
 
 	if err != nil {

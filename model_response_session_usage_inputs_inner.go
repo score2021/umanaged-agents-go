@@ -387,6 +387,7 @@ func (o *ResponseSessionUsageInputsInner) UnmarshalJSON(data []byte) (err error)
 	varResponseSessionUsageInputsInner := _ResponseSessionUsageInputsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSessionUsageInputsInner)
 
 	if err != nil {

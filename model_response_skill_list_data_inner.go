@@ -335,6 +335,7 @@ func (o *ResponseSkillListDataInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseSkillListDataInner := _ResponseSkillListDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSkillListDataInner)
 
 	if err != nil {

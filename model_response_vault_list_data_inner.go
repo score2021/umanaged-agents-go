@@ -275,6 +275,7 @@ func (o *ResponseVaultListDataInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseVaultListDataInner := _ResponseVaultListDataInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseVaultListDataInner)
 
 	if err != nil {

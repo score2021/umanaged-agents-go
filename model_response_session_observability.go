@@ -337,6 +337,7 @@ func (o *ResponseSessionObservability) UnmarshalJSON(data []byte) (err error) {
 	varResponseSessionObservability := _ResponseSessionObservability{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSessionObservability)
 
 	if err != nil {

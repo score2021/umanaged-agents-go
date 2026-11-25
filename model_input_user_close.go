@@ -107,6 +107,7 @@ func (o *InputUserClose) UnmarshalJSON(data []byte) (err error) {
 	varInputUserClose := _InputUserClose{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varInputUserClose)
 
 	if err != nil {

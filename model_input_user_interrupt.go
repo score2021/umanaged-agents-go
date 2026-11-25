@@ -143,6 +143,7 @@ func (o *InputUserInterrupt) UnmarshalJSON(data []byte) (err error) {
 	varInputUserInterrupt := _InputUserInterrupt{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varInputUserInterrupt)
 
 	if err != nil {

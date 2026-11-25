@@ -107,6 +107,7 @@ func (o *EventSessionStatusIdleStopReasonAnyOf2) UnmarshalJSON(data []byte) (err
 	varEventSessionStatusIdleStopReasonAnyOf2 := _EventSessionStatusIdleStopReasonAnyOf2{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventSessionStatusIdleStopReasonAnyOf2)
 
 	if err != nil {

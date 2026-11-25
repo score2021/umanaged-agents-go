@@ -219,6 +219,7 @@ func (o *ResponseModelListDataInnerPricingInnerRatesInner) UnmarshalJSON(data []
 	varResponseModelListDataInnerPricingInnerRatesInner := _ResponseModelListDataInnerPricingInnerRatesInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseModelListDataInnerPricingInnerRatesInner)
 
 	if err != nil {

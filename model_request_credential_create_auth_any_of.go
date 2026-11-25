@@ -135,6 +135,7 @@ func (o *RequestCredentialCreateAuthAnyOf) UnmarshalJSON(data []byte) (err error
 	varRequestCredentialCreateAuthAnyOf := _RequestCredentialCreateAuthAnyOf{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestCredentialCreateAuthAnyOf)
 
 	if err != nil {

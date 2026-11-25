@@ -163,6 +163,7 @@ func (o *ResponseUsageStorageBucketsInner) UnmarshalJSON(data []byte) (err error
 	varResponseUsageStorageBucketsInner := _ResponseUsageStorageBucketsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseUsageStorageBucketsInner)
 
 	if err != nil {

@@ -107,6 +107,7 @@ func (o *ResponseSessionListDataInnerEnvironmentLastErrorDetails) UnmarshalJSON(
 	varResponseSessionListDataInnerEnvironmentLastErrorDetails := _ResponseSessionListDataInnerEnvironmentLastErrorDetails{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSessionListDataInnerEnvironmentLastErrorDetails)
 
 	if err != nil {

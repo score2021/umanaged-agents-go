@@ -212,6 +212,7 @@ func (o *ResponseMcpProbeToolsInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseMcpProbeToolsInner := _ResponseMcpProbeToolsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseMcpProbeToolsInner)
 
 	if err != nil {

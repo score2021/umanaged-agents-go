@@ -107,6 +107,7 @@ func (o *RequestVaultCreate) UnmarshalJSON(data []byte) (err error) {
 	varRequestVaultCreate := _RequestVaultCreate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestVaultCreate)
 
 	if err != nil {

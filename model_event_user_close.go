@@ -195,6 +195,7 @@ func (o *EventUserClose) UnmarshalJSON(data []byte) (err error) {
 	varEventUserClose := _EventUserClose{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventUserClose)
 
 	if err != nil {

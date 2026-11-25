@@ -277,6 +277,7 @@ func (o *ResponseUsageStorage) UnmarshalJSON(data []byte) (err error) {
 	varResponseUsageStorage := _ResponseUsageStorage{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseUsageStorage)
 
 	if err != nil {

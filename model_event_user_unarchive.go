@@ -195,6 +195,7 @@ func (o *EventUserUnarchive) UnmarshalJSON(data []byte) (err error) {
 	varEventUserUnarchive := _EventUserUnarchive{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventUserUnarchive)
 
 	if err != nil {

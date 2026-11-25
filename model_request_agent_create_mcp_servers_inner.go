@@ -235,6 +235,7 @@ func (o *RequestAgentCreateMcpServersInner) UnmarshalJSON(data []byte) (err erro
 	varRequestAgentCreateMcpServersInner := _RequestAgentCreateMcpServersInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestAgentCreateMcpServersInner)
 
 	if err != nil {

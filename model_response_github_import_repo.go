@@ -163,6 +163,7 @@ func (o *ResponseGithubImportRepo) UnmarshalJSON(data []byte) (err error) {
 	varResponseGithubImportRepo := _ResponseGithubImportRepo{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseGithubImportRepo)
 
 	if err != nil {

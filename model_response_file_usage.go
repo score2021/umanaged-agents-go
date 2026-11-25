@@ -221,6 +221,7 @@ func (o *ResponseFileUsage) UnmarshalJSON(data []byte) (err error) {
 	varResponseFileUsage := _ResponseFileUsage{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseFileUsage)
 
 	if err != nil {

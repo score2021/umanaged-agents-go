@@ -219,6 +219,7 @@ func (o *CapacityExceededStorage) UnmarshalJSON(data []byte) (err error) {
 	varCapacityExceededStorage := _CapacityExceededStorage{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCapacityExceededStorage)
 
 	if err != nil {

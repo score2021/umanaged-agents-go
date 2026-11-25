@@ -107,6 +107,7 @@ func (o *ResponseCredentialAuth) UnmarshalJSON(data []byte) (err error) {
 	varResponseCredentialAuth := _ResponseCredentialAuth{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseCredentialAuth)
 
 	if err != nil {

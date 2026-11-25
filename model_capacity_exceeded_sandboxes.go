@@ -219,6 +219,7 @@ func (o *CapacityExceededSandboxes) UnmarshalJSON(data []byte) (err error) {
 	varCapacityExceededSandboxes := _CapacityExceededSandboxes{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCapacityExceededSandboxes)
 
 	if err != nil {

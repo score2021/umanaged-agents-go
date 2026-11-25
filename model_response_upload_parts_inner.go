@@ -163,6 +163,7 @@ func (o *ResponseUploadPartsInner) UnmarshalJSON(data []byte) (err error) {
 	varResponseUploadPartsInner := _ResponseUploadPartsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseUploadPartsInner)
 
 	if err != nil {

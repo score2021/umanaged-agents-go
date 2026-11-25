@@ -135,6 +135,7 @@ func (o *ResponseFileDeleted) UnmarshalJSON(data []byte) (err error) {
 	varResponseFileDeleted := _ResponseFileDeleted{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseFileDeleted)
 
 	if err != nil {

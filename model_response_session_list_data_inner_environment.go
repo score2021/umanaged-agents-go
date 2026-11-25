@@ -239,6 +239,7 @@ func (o *ResponseSessionListDataInnerEnvironment) UnmarshalJSON(data []byte) (er
 	varResponseSessionListDataInnerEnvironment := _ResponseSessionListDataInnerEnvironment{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSessionListDataInnerEnvironment)
 
 	if err != nil {

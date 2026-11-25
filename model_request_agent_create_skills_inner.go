@@ -171,6 +171,7 @@ func (o *RequestAgentCreateSkillsInner) UnmarshalJSON(data []byte) (err error) {
 	varRequestAgentCreateSkillsInner := _RequestAgentCreateSkillsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRequestAgentCreateSkillsInner)
 
 	if err != nil {

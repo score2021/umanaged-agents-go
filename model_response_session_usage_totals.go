@@ -331,6 +331,7 @@ func (o *ResponseSessionUsageTotals) UnmarshalJSON(data []byte) (err error) {
 	varResponseSessionUsageTotals := _ResponseSessionUsageTotals{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseSessionUsageTotals)
 
 	if err != nil {

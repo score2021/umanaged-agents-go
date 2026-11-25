@@ -225,6 +225,7 @@ func (o *EventAgentContextCompacted) UnmarshalJSON(data []byte) (err error) {
 	varEventAgentContextCompacted := _EventAgentContextCompacted{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEventAgentContextCompacted)
 
 	if err != nil {
